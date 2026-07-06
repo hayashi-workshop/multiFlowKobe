@@ -1,3 +1,15 @@
+# mac
+**/.DS_Store
+
+# sphinx
+build/
+
+# python
+*.pyc
+__pycache__/
+.DS_Store
+.doctrees/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
