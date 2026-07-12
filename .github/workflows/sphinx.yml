@@ -1,0 +1,38 @@
+name: Deploy Sphinx to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install sphinx myst-parser furo sphinxcontrib-bibtex sphinxcontrib-bibtex sphinx-copybutton sphinx-togglebutton
+          if [ -f docs/requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Build Sphinx
+        run: |
+          make html
+
+      - name: List files before deploy
+        run: |
+          echo "Checking contents of publish folder:"
+          ls -R build/html
+          
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/html
+          force_orphan: true
