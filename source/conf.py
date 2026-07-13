@@ -60,7 +60,7 @@ html_theme_options = {
 
 html_static_path = ['_static']
 #html_extra_path = ['fig', 'python']
-#html_extra_path = ['extra']
+html_extra_path = ['extra']
 
 #html_css_files = ['css/custom.css']
 
