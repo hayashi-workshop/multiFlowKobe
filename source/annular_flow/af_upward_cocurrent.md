@@ -46,7 +46,7 @@ For a given set of the volume flow rates,
 ```
 Therefore, we can obtain $- \left. dp/dz \right|_{TP}$ and $\alpha_{G}$ by solving the momentum equations, provided that the friction factors are given. 
 
-```{figure} ../fig/AnnularFlow.pdf
+```{figure} ../fig/AnnularFlow.png
 :name: AnnularFlow_film_model
 Simple model of annular flow.
 ```

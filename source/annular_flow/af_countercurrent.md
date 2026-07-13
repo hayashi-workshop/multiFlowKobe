@@ -26,7 +26,7 @@ This relation of the gas Froude number gives a critical gas velocity for suspend
 ```
 The dependence of $Fr_{G}$ on $\alpha_{L}$ is shown in {numref}`AnnularFlow_annular_criticalFrG`.
 
-```{figure} ../python/annular_criticalFrG.pdf
+```{figure} ../python/annular_criticalFrG.png
 :name: AnnularFlow_annular_criticalFrG
 Critical gas Froude number to suspend the liquid phase.
 ```

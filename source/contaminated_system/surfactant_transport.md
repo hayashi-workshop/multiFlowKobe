@@ -106,7 +106,7 @@ $\nabla_{s} \cdot \mathbf{n}$ is the mean curvature of interface. Introducing th
 ```
 where $D_{s}$ is the diffusion coefficient. 
 
-```{figure} ../fig/Contaminated-Levich.pdf
+```{figure} ../fig/Contaminated-Levich.png
 :name: Contami_Contaminated-Levich 
 Fully-contaminated drop/bubble in uniform flow
 ```

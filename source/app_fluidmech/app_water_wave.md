@@ -27,7 +27,7 @@ Substituting this equation into the continuity equation $\nabla \cdot \mathbf{v}
 ```
 which is the Laplace equation holds in the water ($- \infty < z < \zeta$). 
 
-```{figure} ../fig/Wave-DeepWater.pdf
+```{figure} ../fig/Wave-DeepWater.png
 :name: Wave_Wave-DeepWater
 Deep water wave
 ```
@@ -122,7 +122,7 @@ By definition $c_{p} = \omega / k$, we have
 ```
 The phase velocity of water wave is shown in {numref}`Wave_WV-surfacewave`. 
 
-```{figure} ../python/WV-surfacewave.pdf
+```{figure} ../python/WV-surfacewave.png
 :name: Wave_WV-surfacewave
 Phase velocity of capillary-gravity wave
 ```

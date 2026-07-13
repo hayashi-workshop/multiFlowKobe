@@ -151,12 +151,12 @@ In this limit, $\left( \partial y / \partial z_{0} \right)_{x, y_{0}}$ goes to z
 ```
 This can be observed in {numref}`Auton_Auton-vortex-line`. 
 
-```{figure} ../python/drift.pdf
+```{figure} ../python/drift.png
 :name: Auton_drift
 Total drift $X(0,z)$. For a sphere moving steadily in stagnant fluid, fluid particles are taken away from their initial positions by the motion of the sphere.
 ```
 
-```{figure} ../fig/Auton-ring-vorticity.pdf
+```{figure} ../fig/Auton-ring-vorticity.png
 :name: Auton_Auton-ring-vorticity
 Ring vorticity $\omega_{\varphi}$ always lie on the $\varphi$ coordinate.
 ```

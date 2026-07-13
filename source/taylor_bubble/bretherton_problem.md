@@ -163,12 +163,12 @@ Solving this equation for the curvature, we finally have
 
 A derivation of curvature equation up to $\epsilon^{2}$ is also possible and was given by {cite:t}`De_Ryck2002-ko` for the case in the absence of buoyancy. {numref}`fig_kappa_comp` shows a bubble shape computed using the de Ryck model. Some predictions of $h$ at $Re_{b}$ are shown in {numref}`fig_h_deRyck_Fig4`. 
 
-```{figure} ../fig/bubble_shape_Magnini2017Fig4b.pdf
+```{figure} ../fig/bubble_shape_Magnini2017Fig4b.png
 :name: fig_kappa_comp
 The front and rear shapes for $H = 0.642$, $Ca_{b} = 0.01$ and $Re_{b} = 1000$.
 ```
 
-```{figure} ../fig/h_deRyck_Fig4.pdf
+```{figure} ../fig/h_deRyck_Fig4.png
 :name: fig_h_deRyck_Fig4
 Liquid film thickness $h$ predicted by using the $\epsilon^{2}$ model for $Re_{b} = 0$. The $\epsilon^{1}$ model {cite:p}`Magnini2019-jz` is substantially $\epsilon^{0}$ since $Re_{b} = 0$. The predictions are compared with the de Ryck's result and the Han-Shikazono correlation. The curved for de Ryck's predictions are fitting in the form of $h/R = a Ca_{b}^{c}/(1 + b Ca_{b}^{c})$ for data points quoted from the figures in {cite:t}`De_Ryck2002-ko`.
 ```

@@ -98,7 +98,7 @@ Experiments found that $c_{1}^{1/2} = 0.35$ and $\Delta \rho / \rho_{L} \ll 1$, 
 ```
 for gas bubbles rising through a low viscosity liquid in a large pipe. A graphical correlation of Taylor bubbles in the entire range of relevant relevant dimensionless groups was given by {cite:t}`White1962-fp`. Readers those who are interested in analytical method on the rise velocity of Taylor bubble, see {cite:t}`Funada2005-dk`.
 
-```{figure} ../fig/TaylorDrop.pdf
+```{figure} ../fig/TaylorDrop.png
 :name: TaylorBubble_TaylorBubble
 Taylor drop ({cite:p}`Hayashi2011-kw`)
 ```

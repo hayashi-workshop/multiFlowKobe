@@ -7,7 +7,7 @@
 
 Flow structures in two-phase flows show a significant variety. At a relatively small gas volume flux, the gas phase injected into a vertical pipe filled with still liquid may form rising bubbles. Bubble flows are termed bubbly flows. With increasing gas flow rate, two-phase co-current flows in a vertical pipe may include large bubbles in a bullet-like shape followed by small bubbles in liquid slug. This flow structure is called a slug flow. A very high gas flow rate allows the gas phase to form a gas core in the center region of a pipe, and the liquid phase pushed out toward the pipe wall takes a ring-like shape; therefore, this flow pattern is referred to as annular flow. In between the slug and annular flows, we may observe a more complicated flow characteristics; referred to as a churn flow. {numref}`OneDimensional_Mishima_Ishii` shows a flow pattern map drawn by using Mishima-Ishii's criteria {cite:p}`Mishima1984-fv`. 
 
-```{figure} ../python/fig-Mishima-Ishii.pdf
+```{figure} ../python/fig-Mishima-Ishii.png
 :name: OneDimensional_Mishima_Ishii
 Flow pattern map drawn by Mishima-Ishii criteria for air-water system in 20 mm pipe. The horizontal and vertical axes are the gas and liquid volumetric fluxes. 
 ```
@@ -36,7 +36,7 @@ The local volume fraction is defined by
     \frac{1}{T} \int_{t - T/2}^{t + T/2} X_{k} (\mathbf{x}, t) dt
 ```
 The time duration $T$ may be taken as small as possible such that $\alpha_{k}$ is an instantaneous quantity, but should be set finite to make $\alpha_{k}$ statistically meaningful. For the gas phase $k = G$, $\alpha_{G}$ is called the void fraction. See {numref}`OneDimensional_volume_fraction` for a schematic description of the definitions. 
-```{figure} ../fig/volume_fraction.pdf
+```{figure} ../fig/volume_fraction.png
 :name: OneDimensional_volume_fraction
 Volume fraction
 ```

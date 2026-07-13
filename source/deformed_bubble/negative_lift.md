@@ -51,7 +51,7 @@ where $C_{LS}$ is given by {eq}`eq:AutonLift_nonref_50` and $\gamma = 0.048$, an
 \omega_{\text{max}}^{*\infty} = \frac{2 \chi^{5/3} (\chi^2 - 1)^{3/2}}{\chi^2 \sec^{-1} \chi - (\chi^2 - 1)^{1/2}}
 ```
 
-```{figure} ../python/lift_data_Re_integrated_for_ln.pdf
+```{figure} ../python/lift_data_Re_integrated_for_ln.png
 :name: lift_data_Re_integrated_for_ln
 Lift coefficient correlations {cite:p}`Hayashi2021-ux`
 ```

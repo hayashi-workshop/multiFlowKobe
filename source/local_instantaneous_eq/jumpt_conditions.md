@@ -92,7 +92,7 @@ where $R_{1}$ and $R_{2}$ are the principal radii of curvature, and for the sphe
 ```
 This is the well-known Young-Laplace equation; the gas pressure is larger than the pressure of the surrounding liquid by the factor of $2 \sigma / R$ to maintain equilibrium under the action of the surface tension force. 
 
-```{figure} ../fig/jump-condition.pdf
+```{figure} ../fig/jump-condition.png
 :name: OneDimensional_two-phase-flows
 Schematic descriptions of jump conditions
 ```

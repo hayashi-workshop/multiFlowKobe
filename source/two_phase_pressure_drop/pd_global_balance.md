@@ -70,7 +70,7 @@ where
 \end{split}
 ```
 
-```{figure} ../fig/two-phase-pressure-drop.pdf
+```{figure} ../fig/two-phase-pressure-drop.png
 :name: DriftFlux_two-phase-pressure-drop
 Vertical and horizontal two-phase pipe flows.
 ```

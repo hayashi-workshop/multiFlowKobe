@@ -8,7 +8,7 @@
 * **Reference:** Landau-Lifshitz, Fluid Mechanics, Pergamon {cite:p}`Landau1987` (Chap. 2).
 ```
 
-```{figure} ../fig/Basset-problem-setting.pdf
+```{figure} ../fig/Basset-problem-setting.png
 :name: Basset_Oscillating sphere
 Oscillating sphere
 ```

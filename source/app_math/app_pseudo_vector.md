@@ -5,7 +5,7 @@
 {cite:t}`Ando2019`
 ```
 
-```{figure} ../fig/parity-transformation.pdf
+```{figure} ../fig/parity-transformation.png
 :name: parity-transformation
 Parity transformation
 ```

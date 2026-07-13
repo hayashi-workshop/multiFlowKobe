@@ -62,7 +62,7 @@ where $S$ is the bubble surface, $\mathbf{n}$ is the unit outward normal to the 
 	= \mu \iiint_{V} \omega_{i} \omega_{i} dV - 2 \mu \iint_{S} \mathbf{n} \cdot [ ( \mathbf{v} \cdot \nabla ) \mathbf{v} ] dS
 ```
 
-```{figure} ../fig/Stone-problem-setting.pdf
+```{figure} ../fig/Stone-problem-setting.png
 :name: Stone_Stone-problem-setting
 Spherical bubble in uniform flow
 ```

@@ -1,7 +1,7 @@
 (app_Dirac_delta)=
 # $\nabla^{2} (1/r)$ behaves as Dirac's delta
 
-```{figure} ../fig/Auton-DiracDelta.pdf
+```{figure} ../fig/Auton-DiracDelta.png
 :name: Auton_Auton-DiracDelta
 Small sphere $S_{\epsilon}$ surrounded by closed surface $S$.
 ```

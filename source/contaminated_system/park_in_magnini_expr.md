@@ -208,6 +208,6 @@ The subscript $s$ denotes the stationary film. The subscript $f$ denotes the fro
 ```
 In order to reproduce the problem with our code for the full curvature expression, we used a very small value for $Ca_{b}$ since {cite:t}`Park1992-mb` used a simplified curvature expression ($H_{XXX}$). Therefore, we utilized $Ca_{b} = 1 \times 10^{-6}$ although Park did not mention the actual value. Due to the small $Ca_{b}$, the film thickness is extremely thin (the Bretherton scaling: $\propto Ca_{b}^{2/3}$). The surfactant concentration decreases from the nose toward the film because of the expansion of the surface area in the meniscus, and then it becomes constant in the film. {cite:t}`Park1992-mb` found that the film thicknening by Marangoni stress is scaled by factor of $4^{2/3}$ at large $\overline{M}$ {cite:p}`Ratulowski1990-eo`. 
 
-```{figure} ../python/Fig_h_g_Park.pdf
+```{figure} ../python/Fig_h_g_Park.png
 :name: fig_H-and-Gs-in-Park1992
 Profiles of film $H$ and surfactant concentration $G_{s}$. This verification corresponds to Fig. 5 in {cite:t}`Park1992-mb`.

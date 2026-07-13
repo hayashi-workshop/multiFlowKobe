@@ -68,12 +68,12 @@ which shows that correlating the bubble velocity on the $Re$-$Eo$ map as a funct
     C_{D} = \frac{4}{3} \frac{Ar^{2}}{Re^{2}} = \frac{4}{3 Fr^{2}} = \frac{4 Eo}{3 We}
 ```
 
-```{figure} ../fig/ForceBalance_bubble.pdf
+```{figure} ../fig/ForceBalance_bubble.png
 :name: ForceBalance_bubble
 Rising bubble in liquid
 ```
 
-```{figure} ../python/gracemap.pdf
+```{figure} ../python/gracemap.png
 :name: ForceBalance_gracemap
 Grace map: $Re$ plotted as a function of $Eo$ and $M$. The values for each line represent $\log M$. The curves are drawn by using a drag correlation proposed by {cite:t}`Tomiyama1998-lv`.
 ```

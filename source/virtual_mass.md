@@ -28,7 +28,7 @@ yields the Laplace equation of $\phi$:
 	\nabla^{2} \phi = 0
 ```
 
-```{figure} fig/cvm.pdf
+```{figure} fig/cvm.png
 :name: virtual_mass_setup
 Spherical body in infinite fluid
 ```
@@ -304,7 +304,7 @@ C_{VM}^{H} =
 ```
 For a prolate ellipsoids, see {cite:t}`Tomiyama2004-ee`. 
 
-```{figure} python/cvm.pdf
+```{figure} python/cvm.png
 :name: virtual_mass_ellipse
 Virtual mass coefficients, $C_{VM}^{V}$ and $C_{VM}^{H}$, of ellipsoidal body.
 ```

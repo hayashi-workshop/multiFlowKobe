@@ -170,7 +170,7 @@ where the coefficient $C$ depends on the flow state as shown in {numref}`DriftFl
 | $C$ | 20 | 12 | 10 | 5 |
 ```
 
-```{figure} ../python/Lockhart-Martinelli.pdf
+```{figure} ../python/Lockhart-Martinelli.png
 :name: DriftFlux_Chisholm-LM
 Chisholm model for two-phase multiplier. solid line: $\phi_{L}$, broken line: $\phi_{G}$. 
 ```

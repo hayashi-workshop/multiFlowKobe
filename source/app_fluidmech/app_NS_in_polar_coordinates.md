@@ -92,7 +92,7 @@ The Jacobian is the coefficient of a infinitesimal volume in the curvilinear coo
 dV = J d\xi d\eta d\zeta
 ```
 
-```{figure} ../fig/VCT-curvilinearCoord.pdf
+```{figure} ../fig/VCT-curvilinearCoord.png
 :name: VCT-curvilinearCoord
 Orthogonal curvilinear system
 ```

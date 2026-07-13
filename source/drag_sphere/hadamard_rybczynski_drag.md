@@ -213,7 +213,7 @@ where the velocity components are deduced from $\psi$ as
 ```
 {numref}`HR_Flow in/about fluid sphere` shows several streamlines for $\psi$. 
 
-```{figure} ../python/HR_streamline.pdf
+```{figure} ../python/HR_streamline.png
 :name: HR_Flow in/about fluid sphere
 Flow in/about fluid sphere. (left) $\mu^{(i)}/\mu^{(e)} = 0$, $\psi^{(e)} \sim 0, = -0.3, -0.6, -0.9$, $\psi^{(i)} \sim 0, = 0.01, 0.02, 0.04$. (right) $\mu^{(i)}/\mu^{(e)} = 10$, $\psi^{(e)} \sim 0, = -0.2, -0.4, -0.6$, $\psi^{(i)} \sim 0, = 0.001, 0.002, 0.003, 0.004$.
 ```

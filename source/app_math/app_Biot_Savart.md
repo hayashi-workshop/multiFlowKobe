@@ -10,7 +10,7 @@
 {cite:t}`Saffman1995-ic`
 ```
 
-```{figure} ../fig/Auton-BiotSavart.pdf
+```{figure} ../fig/Auton-BiotSavart.png
 :name: Auton_Auton-BiotSavart
 Biot-Savart law
 ```

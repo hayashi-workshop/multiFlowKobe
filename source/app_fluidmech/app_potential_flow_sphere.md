@@ -6,7 +6,7 @@
 - {ref}`levich_drag`
 ```
 
-```{figure} ../fig/Levich-PotentialFlowSphere.pdf
+```{figure} ../fig/Levich-PotentialFlowSphere.png
 :name: Levich_Levich-PotentialFlowSphere
 Potential flow about sphere
 ```

@@ -41,7 +41,7 @@ Thus,
 	\nabla^{2} \nabla \times \mathbf{v} = 0
 ```
 
-```{figure} ../fig/Stokes-problem-setting.pdf
+```{figure} ../fig/Stokes-problem-setting.png
 :name: Stokes_Solid sphere in uniform flow
 Solid sphere in uniform flow
 ```
@@ -264,7 +264,7 @@ Let us check the functional form of the vector potential ({numref}`Stokes_Vector
 	= \frac{df}{dr} \mathbf{e}_{r} \times \mathbf{u} 
 	= \left( \frac{3a}{4} - \frac{a^{3}}{4r^{2}} \right) \mathbf{e}_{r} \times \mathbf{u}
 ```
-```{figure} ../fig/Stokes-vector-potential.pdf
+```{figure} ../fig/Stokes-vector-potential.png
 :name: Stokes_Vector potential
 Vector potential: $\mathbf{A}$ on the $y$ axis (left); $\mathbf{A}$ along a circle on a horizontal plane of $z > 0$ (right).
 ```
@@ -356,7 +356,7 @@ The drag force acting of the sphere is calculated in the following. The velocity
 :label: eq:Stokes_eq_pressure
 	p = p_{0} + \frac{3 \mu a u}{2 r^{2}} \cos \theta
 ```
-```{figure} ../fig/Stokes-velocity-component.pdf
+```{figure} ../fig/Stokes-velocity-component.png
 :name: Stokes_Direction cosine
 Direction cosine for the base vectors and the unit vector $\mathbf{u}/u$.}
 ```

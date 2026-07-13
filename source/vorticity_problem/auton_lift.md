@@ -41,7 +41,7 @@ The sphere is fixed ($\mathbf{U} = 0$), so that,
 ```
 This result was obtained by means of numerical integration of the pressure force acting on the sphere; however, a physical argument based on the momentum theorem was also given. It is clear from the  formulae of the lift, knowledge on the vorticity is required to understand the Auton lift. See Appendix {ref}`app_vorticity_equation` for the vorticity equation, Appendix {ref}`app_Helmholtz_law` for Helmholtz's law of vortex motion, and Appendix {ref}`app_Biot_Savart` for the Biot-Savart law, if you need.
 
-```{figure} ../fig/Auton-problem-setting.pdf
+```{figure} ../fig/Auton-problem-setting.png
 :name: Auton_Auton-problem-setting
 Sphere in weak shear flow.
 ```
@@ -167,7 +167,7 @@ Then, the vorticity is given by (see derivation by Lighthill in Appendix {ref}`a
 ```
 It is worth noting that $\omega_{\varphi}$ does not depend on $t$; the factor $r \sin \theta / \hat{\rho}_{0} = \hat{\rho} d \varphi / \hat{\rho}_{0} d\varphi$ represents the stretching rate of vorticity (fluid material) element, so the primary flow causes only stretching of the ring vorticity, $\omega_{\varphi}$. {numref}`Auton_Auton-vortex-line` shows a vortex line coming from upstream stretched by the primary flow while advected toward downstream. 
 
-```{figure} ../fig/Auton-vortex-line.pdf
+```{figure} ../fig/Auton-vortex-line.png
 :name: Auton_Auton-vortex-line
 Vortex line stretched by primary flow. $u_{0} = 1$, $a = 1$, the initial position of the line element $y_{0} = 0.1$.
 ```
@@ -325,7 +325,7 @@ Hence,
 ```
 It is obvious that $v_{0r} = 0$ at $r = a$. 
 
-```{figure} ../fig/Auton-image-system.pdf
+```{figure} ../fig/Auton-image-system.png
 :name: Auton_Auton-image-system
 Image system of vorticity
 
@@ -396,7 +396,7 @@ Auton obtained the Biot-Savart field by means of numerical integration, in which
 ```
 {numref}`Auton_AutonTable5` shows the velocity components of the secondary flow given by Auton. 
 
-```{figure} ../python/AutonTable5.pdf
+```{figure} ../python/AutonTable5.png
 :name: Auton_AutonTable5
 Secondary velocity at sphere surface produced by vorticity, $v'_{\theta}(a, \theta, 0)$ and $v'_{\varphi}(a, \theta, \pi/2)$.
 ```

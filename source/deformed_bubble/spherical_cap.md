@@ -26,7 +26,7 @@ For $Re > 150$, $\theta_{w} \sim 50^{\circ}$ {cite:p}`Clift1978-wa`, so that $d 
 	Re = \frac{\rho u d}{\mu}
 ```
 
-```{figure} ../fig/SphericalCap-problem-setting.pdf
+```{figure} ../fig/SphericalCap-problem-setting.png
 :name: SphericalCap_Spherical cap bubble
 Spherical-cap bubble
 ```

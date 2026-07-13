@@ -143,7 +143,7 @@ An example of the calculation procedure is as follows:
 - Draw velocity profiles using Eqs. {eq}`eq:TaylorBubble_eq_internal_velocity_field` and {eq}`eq:TaylorBubble_eq_external_velocity_field`. 
 {numref}`TaylorBubble_fig_velocity_profile` shows an example of the velocity profiles inside and outside a drop (system 11 in the literature). 
 
-```{figure} ../python/GoldsmithTaylor.pdf
+```{figure} ../python/GoldsmithTaylor.png
 :name: TaylorBubble_fig_velocity_profile
 Velocity profile. $\Delta \rho = -0.214$ g/cm$^{3}$, $\mu_{o} = 0.1224$ Pa s, $\mu_{i}/\mu_{o} = 1.1$, $R = 4$ mm, $u = -0.183$ cm/s. The calculated $h$ is 1.07 mm.
 ```
@@ -175,7 +175,7 @@ The velocity profile is
 ```
 {numref}`TaylorBubble_fig_velocity_profile_gas_bubble` shows an example of the external velocity profile. The zero-shear stress condition can be seen, that is, the velocity gradient is zero at the bubble surface. 
 
-```{figure} ../python/GoldsmithTaylor_gas_bubble.pdf
+```{figure} ../python/GoldsmithTaylor_gas_bubble.png
 :name: TaylorBubble_fig_velocity_profile_gas_bubble
 Velocity profile. $\Delta \rho = -0.985$ g/cm$^{3}$, $\mu_{o} = 0.13$ Pa s, $R = 4$ mm, $u = -2.15$ cm/s. The calculated $h$ is 1.08 mm.
 ```

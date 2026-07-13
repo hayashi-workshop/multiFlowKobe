@@ -23,7 +23,7 @@ while referring {ref}`Auton_Auton-line-vorticity`. The line vorticity lies along
 	\frac{|\boldsymbol{\omega}_{l}|}{4 \pi} \int_{C} \frac{d\mathbf{s} \times (\mathbf{r} - \mathbf{r}_{l})}{|\mathbf{r} - \mathbf{r}_{l}|^{3}}
 ```
 
-```{figure} ../fig/Auton-line-vorticity.pdf
+```{figure} ../fig/Auton-line-vorticity.png
 :name: Auton_Auton-line-vorticity
 Calculation of Biot-Savart field produced by uniform line vorticity.
 ```

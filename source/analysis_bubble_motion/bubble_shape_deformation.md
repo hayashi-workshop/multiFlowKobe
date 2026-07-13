@@ -17,7 +17,7 @@ The Legendre polynomials are orthogonal within $[-1, 1]$, that is $\int_{-1}^{1}
     P_{2} (\cos \theta) = \frac{1}{2} \left( 3 \cos^{2} \theta - 1 \right)
 ```
 
-```{figure} ../fig/Moore_spheroid.pdf
+```{figure} ../fig/Moore_spheroid.png
 :name: Moore_spheroid
 Slightly deformed bubble
 ```
@@ -159,7 +159,7 @@ The bubble shape models are compared in {numref}`Moore_shape_model`. The lineari
 ```
 A similar correlation was derived by {cite:t}`Puncochar2022-mp` from a force balance in the bubble detachment from a nozzle tip. 
 
-```{figure} ../python/MooreWechi.pdf
+```{figure} ../python/MooreWechi.png
 :name: Moore_shape_model
 Moore's bubble shape models
 ```
