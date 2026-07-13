@@ -1,0 +1,415 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="10.1. Large bubbles in liquid" href="deformed_bubble/spherical_cap.html"><link rel="prev" title="9.5. Basset (history) force on a solid sphere in Stokes flow" href="vorticity_problem/basset_force.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>10. Deformed bubbles - multiFlowKobe</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">multiFlowKobe</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">multiFlowKobe</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="local_instantaneous_eq.html">1. Local instantaneous equations</a><input aria-label="Toggle navigation of 1. Local instantaneous equations" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="local_instantaneous_eq/governing_equations.html">1.1. Governing equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_instantaneous_eq/jumpt_conditions.html">1.2. Jump conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_instantaneous_eq/interface_tracking.html">1.3. Interface tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="void_fraction.html">2. Void fraction</a><input aria-label="Toggle navigation of 2. Void fraction" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="void_fraction/averaged_quantities.html">2.1. Averaged quantities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="void_fraction/drift_flux.html">2.2. Drift-flux model</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="two_phase_pressure_drop.html">3. Two-phase pressure drop</a><input aria-label="Toggle navigation of 3. Two-phase pressure drop" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="two_phase_pressure_drop/pd_global_balance.html">3.1. Global balance in steady upward flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_phase_pressure_drop/pd_homogeneous.html">3.2. Frictional pressure drop: Homogeneous model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_phase_pressure_drop/pd_lockhart.html">3.3. Frictional pressure drop: Lockhart-Martinelli correlation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="annular_flow.html">4. Annular flow</a><input aria-label="Toggle navigation of 4. Annular flow" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="annular_flow/af_upward_cocurrent.html">4.1. Upward co-current annular flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annular_flow/af_countercurrent.html">4.2. Counter-current annular flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annular_flow/af_ccfl.html">4.3. Counter-current limitation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="averaged_equation.html">5. Averaged equations</a><input aria-label="Toggle navigation of 5. Averaged equations" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="averaged_equation/averaging_basic_equations.html">5.1. Averaging basic equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="averaged_equation/interfacial_momentum_transfer.html">5.2. Interfacial momentum transfer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="analysis_bubble_motion.html">6. Analysis of bubble rise motion</a><input aria-label="Toggle navigation of 6. Analysis of bubble rise motion" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis_bubble_motion/bubble_dimensionless_groups.html">6.1. Dimensionless groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis_bubble_motion/bubble_velocity_correlation.html">6.2. Bubble velocity correlations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis_bubble_motion/bubble_shape_deformation.html">6.3. Shape deformation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="virtual_mass.html">7. Virtual mass</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="drag_sphere.html">8. Drag force acting on spherical body</a><input aria-label="Toggle navigation of 8. Drag force acting on spherical body" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="drag_sphere/stokes_drag_LL.html">8.1. Drag acting on a solid sphere in Stokes flow (LL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drag_sphere/hadamard_rybczynski_drag.html">8.2. Drag acting on a fluid sphere in Stokes flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drag_sphere/levich_drag.html">8.3. Drag acting on a spherical bubble at high <span class="math notranslate nohighlight">\(Re\)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="vorticity_problem.html">9. Vorticity-related problems</a><input aria-label="Toggle navigation of 9. Vorticity-related problems" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="vorticity_problem/stokes_drag_GKB.html">9.1. Drag acting on a solid sphere in Stokes flow (GKB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vorticity_problem/drag_enstrophy.html">9.2. Drag-enstrophy relation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vorticity_problem/drag_vorticity.html">9.3. Drag-vorticity relation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vorticity_problem/auton_lift.html">9.4. Lift acting on spherical body in inviscid flow with weak shear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vorticity_problem/basset_force.html">9.5. Basset (history) force on a solid sphere in Stokes flow</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">10. Deformed bubbles</a><input aria-label="Toggle navigation of 10. Deformed bubbles" checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="deformed_bubble/spherical_cap.html">10.1. Large bubbles in liquid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deformed_bubble/wave_analogy.html">10.2. Wave analogy for bubble rise velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deformed_bubble/negative_lift.html">10.3. Lift reversal</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="taylor_bubble.html">11. Taylor bubble: bullet-shaped bubbles in pipe</a><input aria-label="Toggle navigation of 11. Taylor bubble: bullet-shaped bubbles in pipe" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="taylor_bubble/taylor_order_of_magnitude.html">11.1. Order-of-magnitude analysis for bubble velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="taylor_bubble/goldsmith_maison.html">11.2. Lubrication of liquid film</a></li>
+<li class="toctree-l2"><a class="reference internal" href="taylor_bubble/bretherton_problem.html">11.3. Bretherton problem</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contaminated_system.html">12. Contaminated system</a><input aria-label="Toggle navigation of 12. Contaminated system" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contaminated_system/isotherm.html">12.1. Isotherm and surfactant kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contaminated_system/surfactant_transport.html">12.2. Surfactant transport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contaminated_system/contaminated_drop.html">12.3. Contaminated drops in Stokes flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contaminated_system/park_in_magnini_expr.html">12.4. Bretherton problem with surfactant</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="app_math.html">Mathematics tips</a><input aria-label="Toggle navigation of Mathematics tips" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="app_math/app_identities.html">Some useful identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_math/app_pseudo_vector.html">Polar and axial vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_math/app_Biot_Savart.html">Biot-Savart law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_math/app_Dirac_delta.html"><span class="math notranslate nohighlight">\(\nabla^{2} (1/r)\)</span> behaves as Dirac’s delta</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="app_fluidmech.html">Fluid mechanics fundamentals</a><input aria-label="Toggle navigation of Fluid mechanics fundamentals" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_NS_in_polar_coordinates.html">Continuity and NS equations in polar coordinate systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_viscous_dissipation.html">Viscous dissipation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_potential_flow_sphere.html">Potential flow about sphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_water_wave.html">Water wave of infinitesimal amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_vorticity_equation.html">Vorticity equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_Helmholtz_law.html">Helmholtz’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_drift_function.html">Vorticity in terms of drift function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_Biot_Savart_line_vorticity.html">Biot-Savart field by uniform line vorticity</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">References</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/deformed_bubble.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="deformed-bubbles">
+<span id="deformed-bubble"></span><h1><span class="section-number">10. </span>Deformed bubbles<a class="headerlink" href="#deformed-bubbles" title="Link to this heading">¶</a></h1>
+<div class="admonition-summary admonition">
+<p class="admonition-title">Summary</p>
+<ul class="simple">
+<li><p><strong>Subject:</strong> Bubbles of spherical-cap and ellipsodidal shapes are discussed.</p></li>
+<li><p><strong>Main conclusion:</strong> <span class="math notranslate nohighlight">\(u = \sqrt{ \frac{2 \sigma}{\rho d} + \frac{g d}{2} }\)</span></p></li>
+<li><p><strong>Key idea</strong> Viscous contribution is no longer important, while surface tension and inertial effects are of primal importance in drag.</p></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deformed_bubble/spherical_cap.html">10.1. Large bubbles in liquid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deformed_bubble/wave_analogy.html">10.2. Wave analogy for bubble rise velocity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deformed_bubble/negative_lift.html">10.3. Lift reversal</a></li>
+</ul>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="deformed_bubble/spherical_cap.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">10.1. </span>Large bubbles in liquid</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="vorticity_problem/basset_force.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">9.5. </span>Basset (history) force on a solid sphere in Stokes flow</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Kosuke Hayashi@Kobe University
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/hayashi-workshop/multiFlowKobe" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+            </a>
+              <a class="muted-link " href="https://www.lab.kobe-u.ac.jp/eng-mfd/" aria-label="Home">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg>
+            </a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'open footnote';</script>
+    <script>let toggleHintHide = 'hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </body>
+</html>

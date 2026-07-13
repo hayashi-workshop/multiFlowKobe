@@ -1,0 +1,684 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="8.3. Drag acting on a spherical bubble at high \(Re\)" href="levich_drag.html"><link rel="prev" title="8.1. Drag acting on a solid sphere in Stokes flow (LL)" href="stokes_drag_LL.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>8.2. Drag acting on a fluid sphere in Stokes flow - multiFlowKobe</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">multiFlowKobe</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <span class="sidebar-brand-text">multiFlowKobe</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../local_instantaneous_eq.html">1. Local instantaneous equations</a><input aria-label="Toggle navigation of 1. Local instantaneous equations" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../local_instantaneous_eq/governing_equations.html">1.1. Governing equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../local_instantaneous_eq/jumpt_conditions.html">1.2. Jump conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../local_instantaneous_eq/interface_tracking.html">1.3. Interface tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../void_fraction.html">2. Void fraction</a><input aria-label="Toggle navigation of 2. Void fraction" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../void_fraction/averaged_quantities.html">2.1. Averaged quantities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../void_fraction/drift_flux.html">2.2. Drift-flux model</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../two_phase_pressure_drop.html">3. Two-phase pressure drop</a><input aria-label="Toggle navigation of 3. Two-phase pressure drop" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../two_phase_pressure_drop/pd_global_balance.html">3.1. Global balance in steady upward flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_phase_pressure_drop/pd_homogeneous.html">3.2. Frictional pressure drop: Homogeneous model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_phase_pressure_drop/pd_lockhart.html">3.3. Frictional pressure drop: Lockhart-Martinelli correlation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../annular_flow.html">4. Annular flow</a><input aria-label="Toggle navigation of 4. Annular flow" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../annular_flow/af_upward_cocurrent.html">4.1. Upward co-current annular flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annular_flow/af_countercurrent.html">4.2. Counter-current annular flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annular_flow/af_ccfl.html">4.3. Counter-current limitation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../averaged_equation.html">5. Averaged equations</a><input aria-label="Toggle navigation of 5. Averaged equations" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../averaged_equation/averaging_basic_equations.html">5.1. Averaging basic equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../averaged_equation/interfacial_momentum_transfer.html">5.2. Interfacial momentum transfer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../analysis_bubble_motion.html">6. Analysis of bubble rise motion</a><input aria-label="Toggle navigation of 6. Analysis of bubble rise motion" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../analysis_bubble_motion/bubble_dimensionless_groups.html">6.1. Dimensionless groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../analysis_bubble_motion/bubble_velocity_correlation.html">6.2. Bubble velocity correlations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../analysis_bubble_motion/bubble_shape_deformation.html">6.3. Shape deformation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../virtual_mass.html">7. Virtual mass</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../drag_sphere.html">8. Drag force acting on spherical body</a><input aria-label="Toggle navigation of 8. Drag force acting on spherical body" checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stokes_drag_LL.html">8.1. Drag acting on a solid sphere in Stokes flow (LL)</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">8.2. Drag acting on a fluid sphere in Stokes flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="levich_drag.html">8.3. Drag acting on a spherical bubble at high <span class="math notranslate nohighlight">\(Re\)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vorticity_problem.html">9. Vorticity-related problems</a><input aria-label="Toggle navigation of 9. Vorticity-related problems" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vorticity_problem/stokes_drag_GKB.html">9.1. Drag acting on a solid sphere in Stokes flow (GKB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vorticity_problem/drag_enstrophy.html">9.2. Drag-enstrophy relation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vorticity_problem/drag_vorticity.html">9.3. Drag-vorticity relation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vorticity_problem/auton_lift.html">9.4. Lift acting on spherical body in inviscid flow with weak shear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vorticity_problem/basset_force.html">9.5. Basset (history) force on a solid sphere in Stokes flow</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../deformed_bubble.html">10. Deformed bubbles</a><input aria-label="Toggle navigation of 10. Deformed bubbles" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../deformed_bubble/spherical_cap.html">10.1. Large bubbles in liquid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deformed_bubble/wave_analogy.html">10.2. Wave analogy for bubble rise velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deformed_bubble/negative_lift.html">10.3. Lift reversal</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../taylor_bubble.html">11. Taylor bubble: bullet-shaped bubbles in pipe</a><input aria-label="Toggle navigation of 11. Taylor bubble: bullet-shaped bubbles in pipe" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../taylor_bubble/taylor_order_of_magnitude.html">11.1. Order-of-magnitude analysis for bubble velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taylor_bubble/goldsmith_maison.html">11.2. Lubrication of liquid film</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taylor_bubble/bretherton_problem.html">11.3. Bretherton problem</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contaminated_system.html">12. Contaminated system</a><input aria-label="Toggle navigation of 12. Contaminated system" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contaminated_system/isotherm.html">12.1. Isotherm and surfactant kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contaminated_system/surfactant_transport.html">12.2. Surfactant transport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contaminated_system/contaminated_drop.html">12.3. Contaminated drops in Stokes flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contaminated_system/park_in_magnini_expr.html">12.4. Bretherton problem with surfactant</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../app_math.html">Mathematics tips</a><input aria-label="Toggle navigation of Mathematics tips" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../app_math/app_identities.html">Some useful identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app_math/app_pseudo_vector.html">Polar and axial vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app_math/app_Biot_Savart.html">Biot-Savart law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app_math/app_Dirac_delta.html"><span class="math notranslate nohighlight">\(\nabla^{2} (1/r)\)</span> behaves as Dirac’s delta</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../app_fluidmech.html">Fluid mechanics fundamentals</a><input aria-label="Toggle navigation of Fluid mechanics fundamentals" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../app_fluidmech/app_NS_in_polar_coordinates.html">Continuity and NS equations in polar coordinate systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app_fluidmech/app_viscous_dissipation.html">Viscous dissipation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app_fluidmech/app_potential_flow_sphere.html">Potential flow about sphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app_fluidmech/app_water_wave.html">Water wave of infinitesimal amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app_fluidmech/app_vorticity_equation.html">Vorticity equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app_fluidmech/app_Helmholtz_law.html">Helmholtz’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app_fluidmech/app_drift_function.html">Vorticity in terms of drift function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app_fluidmech/app_Biot_Savart_line_vorticity.html">Biot-Savart field by uniform line vorticity</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">References</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/drag_sphere/hadamard_rybczynski_drag.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="drag-acting-on-a-fluid-sphere-in-stokes-flow">
+<span id="hadamard-rybczynski-drag"></span><h1><span class="section-number">8.2. </span>Drag acting on a fluid sphere in Stokes flow<a class="headerlink" href="#drag-acting-on-a-fluid-sphere-in-stokes-flow" title="Link to this heading">¶</a></h1>
+<div class="admonition-summary admonition">
+<p class="admonition-title">Summary</p>
+<ul class="simple">
+<li><p><strong>Subject:</strong> Hadamard-Rybczynski drag <span class="bibtex-citation" id="id1">[<a class="reference internal" href="../reference.html#id16" title="J. S. Hadamard. Mouvement permanent lent d'une sphere liquid et visqueuse dans un liquide visqueux. C. R. Hebd. Seances Acad. Sci. Paris, 152:1735–1738, 1911.">Had11</a>]</span></p></li>
+<li><p><strong>Main conclusion:</strong> Drag is a function of fluids viscosities, <span class="math notranslate nohighlight">\(F_{D} = \left( \frac{2 \mu^{(e)} + 3 \mu^{(i)}}{\mu^{(e)} + \mu^{(i)}} \right) 2 \pi \mu^{(e)} u a\)</span>.</p></li>
+<li><p><strong>Key idea</strong> Boundary conditions at fluids interface; in particular, continuity of tangential viscous stresses at interface between two fluids connects the two velocity fields.</p></li>
+<li><p><strong>Reference:</strong> Derivation presented here is given by Landau and Lifshitz <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../reference.html#id7" title="L. D. Landau and E. M. Lifshitz. Fluid Mechanics: Course of Theoretical Physics, Volume 6. Pergamon, 1987.">LL87</a>]</span> (Chap. 2). Recommended to read the textbook to follow the theory.</p></li>
+</ul>
+</div>
+<p>A fluid sphere of viscosity <span class="math notranslate nohighlight">\(\mu^{(i)}\)</span> is fixed in a uniform flow of <span class="math notranslate nohighlight">\(\mu^{(e)}\)</span>, where the superscripts <span class="math notranslate nohighlight">\((i)\)</span> and <span class="math notranslate nohighlight">\((e)\)</span> denote the internal and external fluids, respectively. The fluids are Newtonian and the Reynolds number is small. Therefore, the flow field in the external fluid can be obtained in the same manner for the Stokes drag, that is,</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-0">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-0">
+<span class="eqno">(8.69)<a class="headerlink" href="#equation-eq-hrdrag-nonref-0" title="Link to this equation">¶</a></span>\[	\mathbf{v}^{(e)} = \mathbf{u} - \alpha \frac{\mathbf{u} + (\mathbf{u} \cdot \mathbf{e}_{r}) \mathbf{e}_{r}}{r} + \beta \frac{ 3 (\mathbf{u} \cdot \mathbf{e}_{r}) \mathbf{e}_{r} - \mathbf{u}}{r^{3}}\]</div>
+</div>
+<p>Note that the coefficients <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> have values different from those for the Stokes drag as will be discussed later. For the internal flow, we assume the velocity in the form <span class="math notranslate nohighlight">\(\mathbf{v}^{(i)} = \nabla \times \mathbf{A} = \nabla \times \nabla \times f \mathbf{u}\)</span>. We do not need to put <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> on the R.H.S. since the internal flow does not require the far field boundary condition. Then, the procedure is the same with <a class="reference internal" href="stokes_drag_LL.html#stokes-drag-ll"><span class="std std-ref">Drag acting on a solid sphere in Stokes flow (LL)</span></a> up to</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-1">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-1">
+<span class="eqno">(8.70)<a class="headerlink" href="#equation-eq-hrdrag-nonref-1" title="Link to this equation">¶</a></span>\[	\nabla^{2} \nabla^{2} f = \text{const.}\]</div>
+</div>
+<p>For the external flow, the constant on the R.H.S. could be set as zero because of the far field boundary condition <span class="math notranslate nohighlight">\(\mathbf{v}^{(e)} \rightarrow \mathbf{u}\)</span>. However, we need to keep it for the internal velocity field. The equation for <span class="math notranslate nohighlight">\(f\)</span> is therefore,</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-2">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-2">
+<span class="eqno">(8.71)<a class="headerlink" href="#equation-eq-hrdrag-nonref-2" title="Link to this equation">¶</a></span>\[		\frac{1}{r^{2}} \frac{d}{dr} \left\{ r^{2} \frac{d}{dr} \left( \frac{1}{r^{2}} \frac{d}{dr} \left( r^{2} \frac{df}{dr} \right) \right) \right\} = b_{0}\]</div>
+</div>
+<p>Integrating this ODE yields</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-3">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-3">
+<span class="eqno">(8.72)<a class="headerlink" href="#equation-eq-hrdrag-nonref-3" title="Link to this equation">¶</a></span>\[	f = \frac{b_{0}}{120} r^{4} - \frac{b_{1}}{2} r + \frac{b_{2}}{6} r^{2} - \frac{b_{3}}{r} + b_{4}\]</div>
+</div>
+<p>The constant <span class="math notranslate nohighlight">\(b_{4}\)</span> can be safely omitted. Rewriting the constants gives</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-4">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-4">
+<span class="eqno">(8.73)<a class="headerlink" href="#equation-eq-hrdrag-nonref-4" title="Link to this equation">¶</a></span>\[	f = \hat{\alpha} r + \frac{\hat{\beta}}{r} + \delta r^{2} + \gamma r^{4}\]</div>
+</div>
+<p>However, <span class="math notranslate nohighlight">\(\hat{\alpha}\)</span> and <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> must be zero to have <span class="math notranslate nohighlight">\(\mathbf{v}^{(i)}\)</span> finite at the origin (<span class="math notranslate nohighlight">\(r = 0\)</span>).</p>
+<div class="toggle docutils container">
+<p>As we have already seen, the functional form <span class="math notranslate nohighlight">\(\alpha r\)</span> in <span class="math notranslate nohighlight">\(f\)</span> yields the factor of <span class="math notranslate nohighlight">\(1/r\)</span> in <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>.
+<span class="math notranslate nohighlight">\(\nabla \times \nabla \times f \mathbf{u} 
+	= \nabla \nabla \cdot f \mathbf{u} - \nabla^{2} f \mathbf{u}
+	\rightarrow \frac{\partial}{\partial x_{i}} \frac{\partial fu_{j}}{\partial x_{j}} - \frac{\partial^{2} f u_{i}}{\partial x_{j} \partial x_{j}}
+	= u_{j} \frac{\partial}{\partial x_{i}} \frac{\partial f}{\partial x_{j}} - u_{i} \frac{\partial^{2} f}{\partial x_{j} \partial x_{j}}\)</span></p>
+<p>The term proportional to <span class="math notranslate nohighlight">\(r\)</span> becomes
+<span class="math notranslate nohighlight">\(u_{j} \frac{\partial}{\partial x_{i}} \frac{\partial r}{\partial x_{j}} - u_{i} \frac{\partial^{2} r}{\partial x_{j} \partial x_{j}}
+	= u_{j} \frac{\partial}{\partial x_{i}} \frac{x_{j}}{r} - u_{i} \frac{\partial }{\partial x_{j}} \frac{x_{j}}{r}
+	= \frac{u_{i}}{r} - \frac{u_{j} x_{j} x_{i}}{r^{3}} - \frac{3 u_{i}}{r} + \frac{u_{i} x_{j} x_{j}}{r^{3}} 
+	= - \frac{u_{j} x_{j} x_{i}}{r^{3}} - \frac{u_{i}}{r}\)</span></p>
+</div>
+<p>Therefore,</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-5">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-5">
+<span class="eqno">(8.74)<a class="headerlink" href="#equation-eq-hrdrag-nonref-5" title="Link to this equation">¶</a></span>\[	f = \delta r^{2} + \gamma r^{4}\]</div>
+</div>
+<p>By substituting this expression into the velocity equation we have</p>
+<div class="math-wrapper docutils container" id="equation-eq-hr-eq-rot-rot-fu-u">
+<div class="math notranslate nohighlight" id="equation-eq-hr-eq-rot-rot-fu-u">
+<span class="eqno">(8.75)<a class="headerlink" href="#equation-eq-hr-eq-rot-rot-fu-u" title="Link to this equation">¶</a></span>\[	\mathbf{v}^{(i)}
+	= \nabla \times \nabla \times ( f \mathbf{u} )
+	= \nabla \times \nabla \times { (\gamma r^{4}  + \delta r^{2}) \mathbf{u} }\]</div>
+</div>
+<p>Expanding this equation in the component form as</p>
+<div class="math-wrapper docutils container" id="equation-eq-hr-eq-rot-rot-fu-component">
+<div class="math notranslate nohighlight" id="equation-eq-hr-eq-rot-rot-fu-component">
+<span class="eqno">(8.76)<a class="headerlink" href="#equation-eq-hr-eq-rot-rot-fu-component" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
+	\nabla \times \nabla \times ( f \mathbf{u} )
+	&amp;= \nabla \nabla \cdot f \mathbf{u} - \nabla^{2} f \mathbf{u} 
+	\rightarrow \frac{\partial }{\partial x_{i}} \frac{\partial f u_{j}}{\partial x_{j}} - \frac{\partial^{2} f u_{i}}{\partial x_{j} \partial x_{j}}  \\
+	&amp;= u_{j} \frac{\partial^{2} f}{\partial x_{i} \partial x_{j}} - u_{i} \frac{\partial^{2} f }{\partial x_{j} \partial x_{j}} \\
+	&amp;= \left(u_{j} \frac{\partial }{\partial x_{i}} - u_{i} \frac{\partial }{\partial x_{j}} \right) \frac{\partial f}{\partial x_{j}}
+\end{split}\end{split}\]</div>
+</div>
+<p>The gradient of <span class="math notranslate nohighlight">\(f\)</span> is</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-6">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-6">
+<span class="eqno">(8.77)<a class="headerlink" href="#equation-eq-hrdrag-nonref-6" title="Link to this equation">¶</a></span>\[	\frac{\partial f}{\partial x_{j}}
+	= \frac{\partial (\gamma r^{4}  + \delta r^{2})}{\partial x_{j}}
+	= ( 4 \gamma r^{2} + 2 \delta ) x_{j}\]</div>
+</div>
+<p>Further differentiating this result gives</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-7">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-7">
+<span class="eqno">(8.78)<a class="headerlink" href="#equation-eq-hrdrag-nonref-7" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
+	&amp;\frac{\partial}{\partial x_{i}} ( 4 \gamma r^{2} + 2 \delta ) x_{j}
+	= 8 \gamma x_{i} x_{j} + ( 4 \gamma r^{2} + 2 \delta ) \delta_{ij} \\
+	&amp;\frac{\partial}{\partial x_{j}} ( 4 \gamma r^{2} + 2 \delta ) x_{j}
+	= 8 \gamma x_{j} x_{j} + 2 ( 2 \gamma r^{2} + \delta ) \delta_{jj} = 20 \gamma r^{2} + 6 \delta 
+\end{split}\end{split}\]</div>
+</div>
+<p>Substituting these results into Eq. <a class="reference internal" href="#equation-eq-hr-eq-rot-rot-fu-component">(8.76)</a> yields</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-8">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-8">
+<span class="eqno">(8.79)<a class="headerlink" href="#equation-eq-hrdrag-nonref-8" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
+	 \left(u_{j} \frac{\partial }{\partial x_{i}} - u_{i} \frac{\partial }{\partial x_{j}} \right) \frac{\partial f}{\partial x_{j}}
+	&amp;= u_{j} ( 8 \gamma x_{i} x_{j} + ( 4 \gamma r^{2} + 2 \delta ) \delta_{ij} ) - u_{i} ( 20 \gamma r^{2} + 6 \delta ) \\
+	&amp;= \gamma r^{2} \left( \frac{8 u_{j} x_{j} x_{i}}{r^{2}} - 16 u_{i} \right) - 4 \delta u_{i}
+\end{split}\end{split}\]</div>
+</div>
+<p>Recasting the constants as <span class="math notranslate nohighlight">\(\delta = A/4\)</span> and <span class="math notranslate nohighlight">\(\gamma = B/8\)</span> gives</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-9">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-9">
+<span class="eqno">(8.80)<a class="headerlink" href="#equation-eq-hrdrag-nonref-9" title="Link to this equation">¶</a></span>\[	\gamma r^{2} \left( \frac{8 u_{j} x_{j} x_{i}}{r^{2}} - 16 u_{i} \right) - 4 \delta u_{i}
+	= B r^{2} \left( \frac{u_{j} x_{j} x_{i}}{r^{2}} - 2 u_{i} \right) - A u_{i}\]</div>
+</div>
+<p>Thus,</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-10">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-10">
+<span class="eqno">(8.81)<a class="headerlink" href="#equation-eq-hrdrag-nonref-10" title="Link to this equation">¶</a></span>\[	\mathbf{v}^{(i)} 
+	= - A \mathbf{u} + B r^{2} \left( ( \mathbf{u} \cdot \mathbf{e}_{r} ) \mathbf{e}_{r} - 2 \mathbf{u} \right)\]</div>
+</div>
+<p>The constants <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span>, <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are determined by the boundary conditions for the velocities and the viscous stresses. The components of <span class="math notranslate nohighlight">\(\mathbf{v}^{(e)}\)</span> are</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-11">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-11">
+<span class="eqno">(8.82)<a class="headerlink" href="#equation-eq-hrdrag-nonref-11" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
+	&amp;v_{r}^{(e)} 
+	= \mathbf{v}^{(e)} \cdot \mathbf{e}_{r}
+	= - u \cos \theta \left( 1 - \frac{2 \alpha}{r} + \frac{2 \beta}{r^{3}} \right) \\
+	&amp;v_{\theta}^{(e)} 
+	= \mathbf{v}^{(e)} \cdot \mathbf{e}_{\theta}
+	= u \sin \theta \left( 1 - \frac{\alpha}{r} - \frac{\beta}{r^{3}} \right)
+\end{split}\end{split}\]</div>
+</div>
+<p>In the internal fluid,</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-12">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-12">
+<span class="eqno">(8.83)<a class="headerlink" href="#equation-eq-hrdrag-nonref-12" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
+	&amp;v_{r}^{(i)} 
+	= \mathbf{v}^{(i)} \cdot \mathbf{e}_{r}
+	= - u \cos \theta \left( - A - B r^{2} \right) \\
+	&amp;v_{\theta}^{(i)} 
+	= \mathbf{v}^{(i)} \cdot \mathbf{e}_{\theta}
+	= u \sin \theta \left( - A - 2 B r^{2} \right)
+\end{split}\end{split}\]</div>
+</div>
+<p>The <span class="math notranslate nohighlight">\(r \theta\)</span> components of the viscous stress</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-13">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-13">
+<span class="eqno">(8.84)<a class="headerlink" href="#equation-eq-hrdrag-nonref-13" title="Link to this equation">¶</a></span>\[	\tau_{r \theta}
+	= \mu \left( \frac{1}{r} \frac{\partial v_{r}}{\partial \theta} + \frac{\partial v_{\theta}}{\partial r} - \frac{v_{\theta}}{r} \right)\]</div>
+</div>
+<p>are</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-14">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-14">
+<span class="eqno">(8.85)<a class="headerlink" href="#equation-eq-hrdrag-nonref-14" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
+	&amp;\tau_{r \theta}^{(e)}
+	= \beta \frac{6 \mu^{(e)} u}{r^{4}} \sin \theta \\
+	&amp;\tau_{r \theta}^{(i)}
+	= - 3 B \mu^{(i)} r u \sin \theta
+\end{split}\end{split}\]</div>
+</div>
+<p>At the interface, they are</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-15">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-15">
+<span class="eqno">(8.86)<a class="headerlink" href="#equation-eq-hrdrag-nonref-15" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
+	\left. v_{r}^{(e)} \right|_{r=a}
+	&amp;= - u \cos \theta \left( 1 - \frac{2 \alpha}{a} + \frac{2 \beta}{a^{3}} \right) \\
+	\left. v_{\theta}^{(e)} \right|_{r=a} 
+	&amp;= u \sin \theta \left( 1 - \frac{\alpha}{a} - \frac{\beta}{a^{3}} \right) \\
+	\left. v_{r}^{(i)} \right|_{r=a} 
+	&amp;= - u \cos \theta \left( - A - B a^{2} \right) \\
+	\left. v_{\theta}^{(i)} \right|_{r=a} 
+	&amp;= u \sin \theta \left( - A - 2 B a^{2} \right) \\
+	\left. \tau_{r \theta}^{(e)} \right|_{r=a}
+	&amp;= \beta \frac{6 \mu^{(e)} u}{a^{4}} \sin \theta \\
+	\left. \tau_{r \theta}^{(i)} \right|_{r=a}
+	&amp;= - 3 B \mu^{(i)} a u \sin \theta
+\end{split}\end{split}\]</div>
+</div>
+<p>The boundary conditions are</p>
+<ul class="simple">
+<li><p>The velocity normal to the interface is continuous and is zero because the sphere is motionless: <span class="math notranslate nohighlight">\(\left. v_{r}^{(e)} \right|_{r=a} = \left. v_{r}^{(i)} \right|_{r=a} = 0\)</span></p></li>
+<li><p>The velocity tangent to the interface is continuous: <span class="math notranslate nohighlight">\(\left. v_{\theta}^{(e)} \right|_{r=a} = \left. v_{\theta}^{(i)} \right|_{r=a}\)</span></p></li>
+<li><p>The tangential viscous stress is continuous: <span class="math notranslate nohighlight">\(\left. \tau_{r \theta}^{(e)} \right|_{r=a} = \left. \tau_{r \theta}^{(i)} \right|_{r=a}\)</span></p></li>
+</ul>
+<p>Applying the boundary conditions yields the following simultaneous equations for the constants:</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-16">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-16">
+<span class="eqno">(8.87)<a class="headerlink" href="#equation-eq-hrdrag-nonref-16" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
+	&amp;A + a^{2} B = 0 \\
+	&amp;- 2 a^{2} \alpha + 2 \beta + a^{3} = 0 \\
+	&amp;a^{3} A + 2  a^{5} B - a^{2} \alpha - \beta + a^{3} = 0 \\
+	&amp;\mu^{(i)} a^{5} B + 2 \mu^{(e)} \beta = 0
+\end{split}\end{split}\]</div>
+</div>
+<p>From the second equation, <span class="math notranslate nohighlight">\(\alpha = a/2 + \beta/a^{2}\)</span>. Substituting this and the first equation into the third equation gives <span class="math notranslate nohighlight">\(B = 2 \beta / a^{5} - 1/2a^{2}\)</span>. By substituting the fourth equation into the R.H.S. we obtain <span class="math notranslate nohighlight">\(B\)</span>, and then, <span class="math notranslate nohighlight">\(\beta\)</span> can be obtained from the fourth equation by using <span class="math notranslate nohighlight">\(B\)</span>. Thus,</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-17">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-17">
+<span class="eqno">(8.88)<a class="headerlink" href="#equation-eq-hrdrag-nonref-17" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
+	&amp;\alpha = \frac{a}{4} \frac{2 \mu^{(e)} + 3 \mu^{(i)}}{\mu^{(e)} + \mu^{(i)}} \\
+	&amp;\beta = \frac{a^{3}}{4} \frac{\mu^{(i)}}{\mu^{(e)} + \mu^{(i)}} \\
+	&amp;A = \frac{1}{2} \frac{\mu^{(e)}}{\mu^{(e)} + \mu^{(i)}} \\
+	&amp;B = - \frac{1}{2 a^{2}} \frac{\mu^{(e)}}{\mu^{(e)} + \mu^{(i)}}
+\end{split}\end{split}\]</div>
+</div>
+<p>The stream functions are given by</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-18">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-18">
+<span class="eqno">(8.89)<a class="headerlink" href="#equation-eq-hrdrag-nonref-18" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
+	&amp;\psi^{(e)} = -\frac{u r^{2} \sin^{2} \theta}{2} \left\{ 1 - \frac{2 \alpha}{r} + \frac{2 \beta}{r^{3}} \right\} \\
+	&amp;\psi^{(i)} = \frac{u r^{2} \sin^{2} \theta}{2} \left\{ A + B r^{2} \right\}
+\end{split}\end{split}\]</div>
+</div>
+<p>where the velocity components are deduced from <span class="math notranslate nohighlight">\(\psi\)</span> as</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-19">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-19">
+<span class="eqno">(8.90)<a class="headerlink" href="#equation-eq-hrdrag-nonref-19" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
+	&amp;v_{r} = \frac{1}{r^{2} \sin \theta} \frac{\partial \psi}{\partial \theta} \\
+	&amp;v_{\theta} = - \frac{1}{r \sin \theta} \frac{\partial \psi}{\partial r}
+\end{split}\end{split}\]</div>
+</div>
+<p><a class="reference internal" href="#hr-flow-in-about-fluid-sphere"><span class="std std-numref">Fig. 8.4</span></a> shows several streamlines for <span class="math notranslate nohighlight">\(\psi\)</span>.</p>
+<figure class="align-default" id="hr-flow-in-about-fluid-sphere">
+<img alt="../_images/HR_streamline.png" src="../_images/HR_streamline.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 8.4 </span><span class="caption-text">Flow in/about fluid sphere. (left) <span class="math notranslate nohighlight">\(\mu^{(i)}/\mu^{(e)} = 0\)</span>, <span class="math notranslate nohighlight">\(\psi^{(e)} \sim 0, = -0.3, -0.6, -0.9\)</span>, <span class="math notranslate nohighlight">\(\psi^{(i)} \sim 0, = 0.01, 0.02, 0.04\)</span>. (right) <span class="math notranslate nohighlight">\(\mu^{(i)}/\mu^{(e)} = 10\)</span>, <span class="math notranslate nohighlight">\(\psi^{(e)} \sim 0, = -0.2, -0.4, -0.6\)</span>, <span class="math notranslate nohighlight">\(\psi^{(i)} \sim 0, = 0.001, 0.002, 0.003, 0.004\)</span>.</span><a class="headerlink" href="#hr-flow-in-about-fluid-sphere" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Let us calculate <span class="math notranslate nohighlight">\(\tau_{rr}\)</span> and the pressure to obtain the drag coefficient. The viscous stress is</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-20">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-20">
+<span class="eqno">(8.91)<a class="headerlink" href="#equation-eq-hrdrag-nonref-20" title="Link to this equation">¶</a></span>\[	\tau_{rr}^{(e)}
+	= 2 \mu \frac{\partial v_{r}}{\partial r}
+	= - 4 \mu u \cos \theta \left( \frac{\alpha}{r^{2}} - \frac{3 \beta}{r^{4}} \right)\]</div>
+</div>
+<p>and at the interface</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-21">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-21">
+<span class="eqno">(8.92)<a class="headerlink" href="#equation-eq-hrdrag-nonref-21" title="Link to this equation">¶</a></span>\[	\left. \tau_{rr}^{(e)} \right|_{r=a}
+	= - 4 \mu u \cos \theta \left( \frac{\alpha}{a^{2}} - \frac{3 \beta}{a^{4}} \right)\]</div>
+</div>
+<p>The pressure can be obtained using the same manner for the Stokes flow, so that</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-22">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-22">
+<span class="eqno">(8.93)<a class="headerlink" href="#equation-eq-hrdrag-nonref-22" title="Link to this equation">¶</a></span>\[	p^{(e)} = p_{0} - \frac{2 \alpha \mu^{(e)} (\mathbf{u} \cdot \mathbf{e}_{r})}{r^{2}}\]</div>
+</div>
+<p>The pressure at the interface is given by</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-23">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-23">
+<span class="eqno">(8.94)<a class="headerlink" href="#equation-eq-hrdrag-nonref-23" title="Link to this equation">¶</a></span>\[	\left. p^{(e)} \right|_{r=a} = p_{0} + \frac{2 \alpha \mu^{(e)} u \cos \theta}{a^{2}}\]</div>
+</div>
+<p>By substituting the stress components into</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-24">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-24">
+<span class="eqno">(8.95)<a class="headerlink" href="#equation-eq-hrdrag-nonref-24" title="Link to this equation">¶</a></span>\[	F_{D}
+	= \iint_{S} (p \cos \theta - \tau_{rr} \cos \theta + \tau_{\theta r} \sin \theta)  dS\]</div>
+</div>
+<p>we have</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-25">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-25">
+<span class="eqno">(8.96)<a class="headerlink" href="#equation-eq-hrdrag-nonref-25" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}	
+	F_{D}
+	&amp;= 2 \pi a^{2} \int_{0}^{\pi} \left( \frac{2 \alpha \mu^{(e)} u}{a^{2}} \cos^{2} \theta + 4 \mu u \left( \frac{\alpha}{a^{2}} - \frac{3 \beta}{a^{4}} \right) \cos^{2} \theta + \beta \frac{6 \mu^{(e)} u}{a^{4}} \sin^{2} \theta \right) \sin \theta d\theta \\
+	&amp;= 4 \pi \mu^{(e)} u \left\{ \left( 3 \alpha - \frac{6 \beta}{a^{2}} \right) \int_{0}^{\pi} \cos^{2} \theta \sin \theta d\theta + \frac{3 \beta}{a^{2}} \int_{0}^{\pi} \sin^{3} \theta d\theta \right\} \\
+\end{split}\end{split}\]</div>
+</div>
+<p>The first and second integrals are <span class="math notranslate nohighlight">\(2/3\)</span> and <span class="math notranslate nohighlight">\(4/3\)</span>, respectively, yielding</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-26">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-26">
+<span class="eqno">(8.97)<a class="headerlink" href="#equation-eq-hrdrag-nonref-26" title="Link to this equation">¶</a></span>\[	F_{D} = 8 \pi \mu^{(e)} u \alpha = \left( \frac{2 \mu^{(e)} + 3 \mu^{(i)}}{\mu^{(e)} + \mu^{(i)}} \right) 2 \pi \mu^{(e)} u a\]</div>
+</div>
+<p>By defining the Reynolds number and the drag coefficient as</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-27">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-27">
+<span class="eqno">(8.98)<a class="headerlink" href="#equation-eq-hrdrag-nonref-27" title="Link to this equation">¶</a></span>\[	Re = \frac{2 \rho^{(e)} u a}{\mu^{(e)}}\]</div>
+</div>
+<p>and</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-28">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-28">
+<span class="eqno">(8.99)<a class="headerlink" href="#equation-eq-hrdrag-nonref-28" title="Link to this equation">¶</a></span>\[	C_{D} = \frac{F_{D}}{\frac{1}{2} \rho^{(e)} u^{2} \pi a^{2}}\]</div>
+</div>
+<p>we obtain</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-29">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-29">
+<span class="eqno">(8.100)<a class="headerlink" href="#equation-eq-hrdrag-nonref-29" title="Link to this equation">¶</a></span>\[	C_{D} = \frac{8}{Re} \left( \frac{2 \mu^{(e)} + 3 \mu^{(i)}}{\mu^{(e)} + \mu^{(i)}} \right)\]</div>
+</div>
+<p>The flow is known as the Hadamard-Rybczynski solution. In the limiting case of <span class="math notranslate nohighlight">\(\mu^{(i)}/\mu^{(e)} \rightarrow \infty\)</span>, the drag coefficient becomes</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-30">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-30">
+<span class="eqno">(8.101)<a class="headerlink" href="#equation-eq-hrdrag-nonref-30" title="Link to this equation">¶</a></span>\[	C_{D} \rightarrow \frac{24}{Re}\]</div>
+</div>
+<p>which corresponds to that of the Stokes solution. On the other hand, <span class="math notranslate nohighlight">\(\mu^{(i)}/\mu^{(e)} \rightarrow 0\)</span> yields</p>
+<div class="math-wrapper docutils container" id="equation-eq-hrdrag-nonref-31">
+<div class="math notranslate nohighlight" id="equation-eq-hrdrag-nonref-31">
+<span class="eqno">(8.102)<a class="headerlink" href="#equation-eq-hrdrag-nonref-31" title="Link to this equation">¶</a></span>\[	C_{D} \rightarrow \frac{16}{Re}\]</div>
+</div>
+<p>Bubbles of small Reynolds numbers show to have this drag coefficient.</p>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="levich_drag.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">8.3. </span>Drag acting on a spherical bubble at high <span class="math notranslate nohighlight">\(Re\)</span></div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="stokes_drag_LL.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">8.1. </span>Drag acting on a solid sphere in Stokes flow (LL)</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Kosuke Hayashi@Kobe University
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/hayashi-workshop/multiFlowKobe" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+            </a>
+              <a class="muted-link " href="https://www.lab.kobe-u.ac.jp/eng-mfd/" aria-label="Home">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg>
+            </a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'open footnote';</script>
+    <script>let toggleHintHide = 'hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </body>
+</html>

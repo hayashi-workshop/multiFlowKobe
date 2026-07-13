@@ -1,0 +1,711 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="8. Drag force acting on spherical body" href="drag_sphere.html"><link rel="prev" title="6.3. Shape deformation" href="analysis_bubble_motion/bubble_shape_deformation.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>7. Virtual mass - multiFlowKobe</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">multiFlowKobe</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">multiFlowKobe</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="local_instantaneous_eq.html">1. Local instantaneous equations</a><input aria-label="Toggle navigation of 1. Local instantaneous equations" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="local_instantaneous_eq/governing_equations.html">1.1. Governing equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_instantaneous_eq/jumpt_conditions.html">1.2. Jump conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_instantaneous_eq/interface_tracking.html">1.3. Interface tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="void_fraction.html">2. Void fraction</a><input aria-label="Toggle navigation of 2. Void fraction" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="void_fraction/averaged_quantities.html">2.1. Averaged quantities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="void_fraction/drift_flux.html">2.2. Drift-flux model</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="two_phase_pressure_drop.html">3. Two-phase pressure drop</a><input aria-label="Toggle navigation of 3. Two-phase pressure drop" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="two_phase_pressure_drop/pd_global_balance.html">3.1. Global balance in steady upward flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_phase_pressure_drop/pd_homogeneous.html">3.2. Frictional pressure drop: Homogeneous model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_phase_pressure_drop/pd_lockhart.html">3.3. Frictional pressure drop: Lockhart-Martinelli correlation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="annular_flow.html">4. Annular flow</a><input aria-label="Toggle navigation of 4. Annular flow" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="annular_flow/af_upward_cocurrent.html">4.1. Upward co-current annular flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annular_flow/af_countercurrent.html">4.2. Counter-current annular flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annular_flow/af_ccfl.html">4.3. Counter-current limitation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="averaged_equation.html">5. Averaged equations</a><input aria-label="Toggle navigation of 5. Averaged equations" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="averaged_equation/averaging_basic_equations.html">5.1. Averaging basic equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="averaged_equation/interfacial_momentum_transfer.html">5.2. Interfacial momentum transfer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="analysis_bubble_motion.html">6. Analysis of bubble rise motion</a><input aria-label="Toggle navigation of 6. Analysis of bubble rise motion" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis_bubble_motion/bubble_dimensionless_groups.html">6.1. Dimensionless groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis_bubble_motion/bubble_velocity_correlation.html">6.2. Bubble velocity correlations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis_bubble_motion/bubble_shape_deformation.html">6.3. Shape deformation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">7. Virtual mass</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="drag_sphere.html">8. Drag force acting on spherical body</a><input aria-label="Toggle navigation of 8. Drag force acting on spherical body" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="drag_sphere/stokes_drag_LL.html">8.1. Drag acting on a solid sphere in Stokes flow (LL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drag_sphere/hadamard_rybczynski_drag.html">8.2. Drag acting on a fluid sphere in Stokes flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drag_sphere/levich_drag.html">8.3. Drag acting on a spherical bubble at high <span class="math notranslate nohighlight">\(Re\)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="vorticity_problem.html">9. Vorticity-related problems</a><input aria-label="Toggle navigation of 9. Vorticity-related problems" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="vorticity_problem/stokes_drag_GKB.html">9.1. Drag acting on a solid sphere in Stokes flow (GKB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vorticity_problem/drag_enstrophy.html">9.2. Drag-enstrophy relation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vorticity_problem/drag_vorticity.html">9.3. Drag-vorticity relation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vorticity_problem/auton_lift.html">9.4. Lift acting on spherical body in inviscid flow with weak shear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vorticity_problem/basset_force.html">9.5. Basset (history) force on a solid sphere in Stokes flow</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="deformed_bubble.html">10. Deformed bubbles</a><input aria-label="Toggle navigation of 10. Deformed bubbles" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="deformed_bubble/spherical_cap.html">10.1. Large bubbles in liquid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deformed_bubble/wave_analogy.html">10.2. Wave analogy for bubble rise velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deformed_bubble/negative_lift.html">10.3. Lift reversal</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="taylor_bubble.html">11. Taylor bubble: bullet-shaped bubbles in pipe</a><input aria-label="Toggle navigation of 11. Taylor bubble: bullet-shaped bubbles in pipe" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="taylor_bubble/taylor_order_of_magnitude.html">11.1. Order-of-magnitude analysis for bubble velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="taylor_bubble/goldsmith_maison.html">11.2. Lubrication of liquid film</a></li>
+<li class="toctree-l2"><a class="reference internal" href="taylor_bubble/bretherton_problem.html">11.3. Bretherton problem</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contaminated_system.html">12. Contaminated system</a><input aria-label="Toggle navigation of 12. Contaminated system" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contaminated_system/isotherm.html">12.1. Isotherm and surfactant kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contaminated_system/surfactant_transport.html">12.2. Surfactant transport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contaminated_system/contaminated_drop.html">12.3. Contaminated drops in Stokes flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contaminated_system/park_in_magnini_expr.html">12.4. Bretherton problem with surfactant</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="app_math.html">Mathematics tips</a><input aria-label="Toggle navigation of Mathematics tips" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="app_math/app_identities.html">Some useful identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_math/app_pseudo_vector.html">Polar and axial vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_math/app_Biot_Savart.html">Biot-Savart law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_math/app_Dirac_delta.html"><span class="math notranslate nohighlight">\(\nabla^{2} (1/r)\)</span> behaves as Dirac’s delta</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="app_fluidmech.html">Fluid mechanics fundamentals</a><input aria-label="Toggle navigation of Fluid mechanics fundamentals" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_NS_in_polar_coordinates.html">Continuity and NS equations in polar coordinate systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_viscous_dissipation.html">Viscous dissipation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_potential_flow_sphere.html">Potential flow about sphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_water_wave.html">Water wave of infinitesimal amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_vorticity_equation.html">Vorticity equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_Helmholtz_law.html">Helmholtz’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_drift_function.html">Vorticity in terms of drift function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_fluidmech/app_Biot_Savart_line_vorticity.html">Biot-Savart field by uniform line vorticity</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">References</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/virtual_mass.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="virtual-mass">
+<span id="id1"></span><h1><span class="section-number">7. </span>Virtual mass<a class="headerlink" href="#virtual-mass" title="Link to this heading">¶</a></h1>
+<div class="admonition-referred-from admonition">
+<p class="admonition-title">Referred from</p>
+<p><a class="reference internal" href="averaged_equation/interfacial_momentum_transfer.html#interfacial-momentum-transfer"><span class="std std-ref">Interfacial momentum transfer</span></a></p>
+</div>
+<div class="admonition-summary admonition">
+<p class="admonition-title">Summary</p>
+<ul class="simple">
+<li><p><strong>Subject:</strong> (Fluid) particles feels their masses heavier than the actual.</p></li>
+<li><p><strong>Main conclusion:</strong> Particle mass is <em>virtually</em> <span class="math notranslate nohighlight">\(\rho_{P} + C_{VM} \rho\)</span>, where <span class="math notranslate nohighlight">\(\rho\)</span> is the density of surrounding fluid, and <span class="math notranslate nohighlight">\(C_{VM} = 1/2\)</span> for sphere.</p></li>
+<li><p><strong>Key idea</strong> Particles must accelerate surroundings, thereby the accelerating motion gives an inertial force.</p></li>
+<li><p><strong>Reference:</strong> <span class="bibtex-citation" id="id2">Landau and Lifshitz [<a class="reference internal" href="reference.html#id7" title="L. D. Landau and E. M. Lifshitz. Fluid Mechanics: Course of Theoretical Physics, Volume 6. Pergamon, 1987.">LL87</a>]</span> (Chap. 1)</p></li>
+</ul>
+</div>
+<p>In this section, a solid sphere moving in an incompressible inviscid fluid is considered. Therefore, let us introduce the velocity potential to express the fluid velocity <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-0">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-0">
+<span class="eqno">(7.1)<a class="headerlink" href="#equation-eq-virtualmass-nonref-0" title="Link to this equation">¶</a></span>\[	\mathbf{v} = \nabla \phi\]</div>
+</div>
+<p>Substituting this expression into the continuity equation</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-1">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-1">
+<span class="eqno">(7.2)<a class="headerlink" href="#equation-eq-virtualmass-nonref-1" title="Link to this equation">¶</a></span>\[	\nabla \cdot \mathbf{v} = 0\]</div>
+</div>
+<p>yields the Laplace equation of <span class="math notranslate nohighlight">\(\phi\)</span>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-2">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-2">
+<span class="eqno">(7.3)<a class="headerlink" href="#equation-eq-virtualmass-nonref-2" title="Link to this equation">¶</a></span>\[	\nabla^{2} \phi = 0\]</div>
+</div>
+<figure class="align-default" id="virtual-mass-setup">
+<img alt="_images/cvm.png" src="_images/cvm.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">Spherical body in infinite fluid</span><a class="headerlink" href="#virtual-mass-setup" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The center of the sphere is set at the origin of the spherical coordinates. At <u>positions far from the sphere</u>, we assume that <span class="math notranslate nohighlight">\(\phi\)</span> is a function of <span class="math notranslate nohighlight">\(r\)</span>. <span class="math notranslate nohighlight">\(\phi_{0} = 1/r\)</span> obviously satisfies the Laplace equation:</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-3">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-3">
+<span class="eqno">(7.4)<a class="headerlink" href="#equation-eq-virtualmass-nonref-3" title="Link to this equation">¶</a></span>\[	\nabla^{2} \phi_{0} \rightarrow \frac{1}{r^{2}} \frac{d}{dr} r^{2} \frac{d \phi_{0}}{dr}
+	= \frac{1}{r^{2}} \frac{d}{dr} r^{2} \left( - \frac{1}{r^{2}} \right) = 0\]</div>
+</div>
+<p>Derivatives of <span class="math notranslate nohighlight">\(\phi_{0}\)</span>, can also be solution of the Laplace equation since</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-4">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-4">
+<span class="eqno">(7.5)<a class="headerlink" href="#equation-eq-virtualmass-nonref-4" title="Link to this equation">¶</a></span>\[	\nabla^{2} \frac{\partial^{n} \phi_{0}}{\partial x_{i_{1}} \partial x_{i_{2}} \cdots \partial x_{i_{n}}} 
+	= \frac{\partial^{n} }{\partial x_{i_{1}} \partial x_{i_{2}} \cdots \partial x_{i_{n}}}  \nabla^{2} \phi_{0}
+	= 0\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(n \ge 1\)</span>. The velocity component <span class="math notranslate nohighlight">\(\mathbf{v}^{(1)}\)</span> for <span class="math notranslate nohighlight">\(- a \phi_{0}\)</span> is given by</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-5">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-5">
+<span class="eqno">(7.6)<a class="headerlink" href="#equation-eq-virtualmass-nonref-5" title="Link to this equation">¶</a></span>\[	\mathbf{v}^{(1)} 
+	= \nabla \left( - \frac{\alpha}{r} \right)
+	= \frac{\partial r}{\partial x_{i}} \frac{d}{dr} \left( - \frac{\alpha}{r} \right)
+	= \alpha \frac{x_{i}}{r} \frac{1}{r^{2}}
+	= \frac{\alpha x_{i}}{r^{3}}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(a\)</span> is a constant. The mass flow rate through the surface of a large sphere <span class="math notranslate nohighlight">\(S_{\infty}\)</span> set at the origin is</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-6">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-6">
+<span class="eqno">(7.7)<a class="headerlink" href="#equation-eq-virtualmass-nonref-6" title="Link to this equation">¶</a></span>\[\begin{split}	\iint_{S_{\infty}} \rho \mathbf{v}^{(1)} \cdot \mathbf{n} dS
+	&amp;= \iint_{S_{\infty}} \rho \mathbf{v}^{(1)} \cdot \mathbf{e}_{r} dS
+	\rightarrow \rho \alpha \iint_{S_{\infty}} \frac{x_{i} x_{i}}{r^{4}} dS
+	= \rho \alpha \iint_{S_{\infty}} \frac{1}{r^{2}} dS \\
+	&amp;= 4 \pi \rho \alpha\end{split}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is the outward unit normal to <span class="math notranslate nohighlight">\(S_{\infty}\)</span>. However, this must vanish because of the incompressibility; therefore, <span class="math notranslate nohighlight">\(\alpha = 0\)</span>. The next candidate is <span class="math notranslate nohighlight">\(\nabla \phi_{0}\)</span>. Let us therefore set <span class="math notranslate nohighlight">\(\mathbf{A} \cdot \nabla \phi_{0}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is a constant vector. The vector component for this velocity potential is given by</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-7">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-7">
+<span class="eqno">(7.8)<a class="headerlink" href="#equation-eq-virtualmass-nonref-7" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}	
+	\mathbf{v}^{(2)} 
+	&amp;= \nabla ( \mathbf{A} \cdot \nabla \phi_{0} )
+	\rightarrow \frac{\partial }{\partial x_{i}} \left( A_{j} \frac{\partial }{\partial x_{j}} \frac{1}{r} \right)
+	= \frac{\partial }{\partial x_{i}} \left( A_{j} \frac{\partial r}{\partial x_{j}} \frac{d}{dr} \frac{1}{r} \right)
+	= A_{j} \frac{\partial }{\partial x_{i}} \left( \frac{x_{j}}{r} \frac{d}{dr} \frac{1}{r} \right)
+	= - A_{j} \frac{\partial }{\partial x_{i}} \left( \frac{x_{j}}{r^{3}} \right) \\
+	&amp;= - A_{j} \left( \frac{\delta_{ij}}{r^{3}} - x_{j} \frac{3 x_{i}}{r^{5}} \right)
+	= \frac{3 A_{j} x_{j} x_{i}}{r^{5}} - \frac{A_{i}}{r^{3}} 
+	\rightarrow \frac{3 ( \mathbf{A} \cdot \mathbf{e}_{r} ) \mathbf{e}_{r} - \mathbf{A}}{r^{3}}
+\end{split}\end{split}\]</div>
+</div>
+<p>In the far field, velocity components given by the velocity potentials of higher order negligibly small compared with <span class="math notranslate nohighlight">\(\mathbf{v}^{(2)}\)</span>. Therefore, in the following, we may write <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> instead of <span class="math notranslate nohighlight">\(\mathbf{v}^{(2)}\)</span>.</p>
+<p>The velocity component normal to the solid sphere <span class="math notranslate nohighlight">\(v_{r}~(= \mathbf{v} \cdot \mathbf{e}_{r})\)</span> must be equal to that of the sphere <span class="math notranslate nohighlight">\(u_{r}~(= \mathbf{u} \cdot \mathbf{e}_{r})\)</span>, i.e. the boundary condition <span class="math notranslate nohighlight">\(( \mathbf{v} - \mathbf{u} ) \cdot \mathbf{e}_{r} = 0\)</span>.</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtual-eq-a-of-sphere">
+<div class="math notranslate nohighlight" id="equation-eq-virtual-eq-a-of-sphere">
+<span class="eqno">(7.9)<a class="headerlink" href="#equation-eq-virtual-eq-a-of-sphere" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}	
+	&amp;\left. \left( \frac{3 A_{j} x_{j} x_{i}}{r^{5}} - \frac{A_{i}}{r^{3}} - u_{i} \right) \frac{x_{i}}{r} \right|_{r=a} = 0
+	\rightarrow \left. \frac{2 A_{i} x_{i} }{r^{4}} - u_{i} \frac{x_{i}}{r} \right|_{r=a} = 0 
+	\rightarrow \left. \left( \frac{2 A_{i}}{r^{3}} - u_{i} \right ) \frac{x_{i}}{r} \right|_{r=a} = 0 \\
+	&amp;\rightarrow A_{i} = \frac{a^{3} u_{i}}{2}
+\end{split}\end{split}\]</div>
+</div>
+<p>The total kinetic energy <span class="math notranslate nohighlight">\(E\)</span> of the fluid is given by</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-8">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-8">
+<span class="eqno">(7.10)<a class="headerlink" href="#equation-eq-virtualmass-nonref-8" title="Link to this equation">¶</a></span>\[	E = \iiint_{V_{\infty}-V} \frac{\rho v^{2}}{2} dV\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(V_{\infty}\)</span> is the fluid volume of a sphere of large size, while its radius will be taken as infinity later to cover the whole system. <span class="math notranslate nohighlight">\(V\)</span> is the volume of the sphere, <span class="math notranslate nohighlight">\(V = 4 \pi a^{3} / 3\)</span>. <span class="math notranslate nohighlight">\(( \mathbf{v} - \mathbf{u} ) \cdot ( \mathbf{v} + \mathbf{u} ) = v^{2} - u^{2}\)</span>. Therefore, <span class="math notranslate nohighlight">\(v^{2} = u^{2} + ( \mathbf{v} - \mathbf{u} ) \cdot ( \mathbf{v} + \mathbf{u} )\)</span>. The integral of the <span class="math notranslate nohighlight">\(v\)</span> square is therefore rewritten as</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-9">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-9">
+<span class="eqno">(7.11)<a class="headerlink" href="#equation-eq-virtualmass-nonref-9" title="Link to this equation">¶</a></span>\[	\iiint_{V_{\infty}-V} \left\{ u^{2} + ( \mathbf{v} - \mathbf{u} ) \cdot ( \mathbf{v} + \mathbf{u} ) \right\} dV
+	= \iiint_{V_{\infty}-V} u^{2} dV + \iiint_{V_{\infty}-V} ( \mathbf{v} - \mathbf{u} ) \cdot ( \mathbf{v} + \mathbf{u} ) dV\]</div>
+</div>
+<p>The first term can be immediately integrated as</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-10">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-10">
+<span class="eqno">(7.12)<a class="headerlink" href="#equation-eq-virtualmass-nonref-10" title="Link to this equation">¶</a></span>\[	\iiint_{V_{\infty}-V} u^{2} dV 
+	= u^{2} \iiint_{V_{\infty}-V} dV
+	= u^{2} \left( V_{\infty} - V \right)\]</div>
+</div>
+<p>For the second term, by writing <span class="math notranslate nohighlight">\(\mathbf{v} = \nabla \phi\)</span> and <span class="math notranslate nohighlight">\(\mathbf{u} = \nabla ( \mathbf{u} \cdot \mathbf{r} )\)</span>, we have</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-11">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-11">
+<span class="eqno">(7.13)<a class="headerlink" href="#equation-eq-virtualmass-nonref-11" title="Link to this equation">¶</a></span>\[	\mathbf{v} + \mathbf{u} = \nabla \phi + \nabla ( \mathbf{u} \cdot \mathbf{r} ) = \nabla ( \phi + \mathbf{u} \cdot \mathbf{r} )\]</div>
+</div>
+<p>Then,</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-12">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-12">
+<span class="eqno">(7.14)<a class="headerlink" href="#equation-eq-virtualmass-nonref-12" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}	
+	( \mathbf{v} - \mathbf{u} ) \cdot ( \mathbf{v} + \mathbf{u} )
+	&amp;= ( \mathbf{v} - \mathbf{u} ) \cdot \nabla ( \phi + \mathbf{u} \cdot \mathbf{r} )
+	= \nabla \cdot ( \mathbf{v} - \mathbf{u} ) ( \phi + \mathbf{u} \cdot \mathbf{r} ) - ( \phi + \mathbf{u} \cdot \mathbf{r} ) \nabla \cdot ( \mathbf{v} - \mathbf{u} ) \\
+	&amp;= \nabla \cdot ( \mathbf{v} - \mathbf{u} ) ( \phi + \mathbf{u} \cdot \mathbf{r} )
+\end{split}\end{split}\]</div>
+</div>
+<p>The second term in the third term vanishes since <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf{v} = \nabla \cdot \mathbf{u} = 0\)</span>. Applying the divergence theorem yields</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-13">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-13">
+<span class="eqno">(7.15)<a class="headerlink" href="#equation-eq-virtualmass-nonref-13" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}	
+	&amp;\iiint_{V_{\infty}-V} u^{2} dV + \iiint_{V_{\infty}-V} ( \mathbf{v} - \mathbf{u} ) \cdot ( \mathbf{v} + \mathbf{u} ) dV \\
+	&amp;= u^{2} \left( V_{\infty} - V \right) + \iiint_{V_{\infty}-V} \nabla \cdot ( \mathbf{v} - \mathbf{u} ) ( \phi + \mathbf{u} \cdot \mathbf{r} ) dV \\
+	&amp;= u^{2} \left( V_{\infty} - V \right) + \iint_{S_{\infty}} ( \mathbf{v} - \mathbf{u} ) ( \phi + \mathbf{u} \cdot \mathbf{r} ) \cdot \mathbf{e}_{r} dS - \iint_{S} ( \mathbf{v} - \mathbf{u} ) ( \phi + \mathbf{u} \cdot \mathbf{r} ) \cdot \mathbf{e}_{r} dS
+\end{split}\end{split}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(S_{\infty}\)</span> is the surface surrounding <span class="math notranslate nohighlight">\(V_{\infty}\)</span>. However, <span class="math notranslate nohighlight">\(( \mathbf{v} - \mathbf{u} ) \cdot \mathbf{e}_{r} = 0\)</span> on <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<div class="math-wrapper amsmath docutils container">
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{split}	
+	u^{2} \left( V_{\infty} - V \right) + \iint_{S_{\infty}} ( \mathbf{v} - \mathbf{u} ) ( \phi + \mathbf{u} \cdot \mathbf{r} ) \cdot \mathbf{e}_{r} dS
+\end{split}
+\end{equation*}\]</div>
+</div>
+<p>Expanding the second term gives</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-14">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-14">
+<span class="eqno">(7.16)<a class="headerlink" href="#equation-eq-virtualmass-nonref-14" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}	
+	\iint_{S_{\infty}} ( \mathbf{v} - \mathbf{u} ) ( \phi + \mathbf{u} \cdot \mathbf{r} ) \cdot \mathbf{e}_{r} dS
+	&amp;= \iint_{S_{\infty}} \left( \frac{3 ( \mathbf{A} \cdot \mathbf{e}_{r} ) \mathbf{e}_{r} - \mathbf{A}}{r^{3}} - \mathbf{u} \right) \left( \mathbf{A} \cdot \nabla \phi_{0} + \mathbf{u} \cdot \mathbf{r} \right) \cdot \mathbf{e}_{r} dS \\
+	&amp;\rightarrow \iint_{S_{\infty}} \left( \frac{3 A_{j} x_{j} x_{i} - A_{i} r^{2}}{r^{5}} - u_{i} \right) \left( A_{k} \frac{\partial}{\partial x_{k}} \frac{1}{r} + u_{k} x_{k} \right) \frac{x_{i}}{r} dS \\
+	&amp;= \iint_{S_{\infty}} \left( \frac{2 A_{j} x_{j}}{r^{3}} - u_{j} x_{j} \right) \left( - \frac{A_{k} x_{k}}{r^{3}} + u_{k} x_{k} \right) \frac{ dS }{r} \\
+	&amp;= \iint_{S_{\infty}} \left( - \frac{2 ( A_{j} x_{j} )^{2}}{r^{3}} + 3 A_{j} x_{j} u_{k} x_{k} - r^{3} ( u_{j} x_{j} )^{2} \right) \frac{dS}{r^{4}} 
+\end{split}\end{split}\]</div>
+</div>
+<p>Since the radius <span class="math notranslate nohighlight">\(a_{\infty}\)</span> of the sphere <span class="math notranslate nohighlight">\(S_{\infty}\)</span> is large, the first term of the integrand is negligible in comparison with the other two terms, so that,</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-15">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-15">
+<span class="eqno">(7.17)<a class="headerlink" href="#equation-eq-virtualmass-nonref-15" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}	
+	\iint_{S_{\infty}} \left( - \frac{2 ( A_{j} x_{j} )^{2}}{r^{3}} + 3 A_{j} x_{j} u_{k} x_{k} - r^{3} ( u_{j} x_{j} )^{2} \right) \frac{dS}{r^{4}} 
+	&amp;\rightarrow \iint_{S_{\infty}} \left( 3 A_{j} x_{j} u_{k} x_{k} - r^{3} ( u_{j} x_{j} )^{2} \right) \frac{dS}{r^{4}} \\
+	&amp;= \frac{3 A_{j} u_{k} - a_{\infty}^{3} u_{j} u_{k}}{a_{\infty}^{2}} \iint_{S_{\infty}} \frac{x_{j} x_{k}}{r^{2}} dS \\
+\end{split}\end{split}\]</div>
+</div>
+<p>The integrand of the surface integral is the dyadic <span class="math notranslate nohighlight">\(\mathbf{e}_{r} \mathbf{e}_{r}\)</span>.</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-16">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-16">
+<span class="eqno">(7.18)<a class="headerlink" href="#equation-eq-virtualmass-nonref-16" title="Link to this equation">¶</a></span>\[\begin{split}
+	\iint_{S_{\infty}} \frac{x_{j} x_{k}}{r^{2}} dS 
+	= \iint_{S_{\infty}} \mathbf{e}_{r} \mathbf{e}_{r} dS 
+\end{split}\]</div>
+</div>
+<p>For the <span class="math notranslate nohighlight">\(xx\)</span> component,</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-17">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-17">
+<span class="eqno">(7.19)<a class="headerlink" href="#equation-eq-virtualmass-nonref-17" title="Link to this equation">¶</a></span>\[\begin{split}
+	\int_{0}^{2 \pi} \int_{0}^{\pi} ( \sin \theta \cos \varphi )^{2} a_{\infty}^{2} \sin \theta d\theta d\varphi
+	= a_{\infty}^{2} \int_{0}^{\pi} \sin^{3} \theta d\theta \int_{0}^{2 \pi} \cos^{2} \varphi d\varphi
+	= \cdot \frac{4 \pi a_{\infty}^{2}}{3}
+\end{split}\]</div>
+</div>
+<p>For the <span class="math notranslate nohighlight">\(xy\)</span> component,</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-18">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-18">
+<span class="eqno">(7.20)<a class="headerlink" href="#equation-eq-virtualmass-nonref-18" title="Link to this equation">¶</a></span>\[\begin{split}
+	\int_{0}^{2 \pi} \int_{0}^{\pi} ( \sin \theta \cos \varphi ) ( \sin \theta \sin \varphi ) a_{\infty}^{2} \sin \theta d\theta d\varphi
+	= a_{\infty}^{2} \int_{0}^{\pi} \sin^{3} \theta d\theta \int_{0}^{2 \pi} \cos \varphi \sin \varphi d\varphi
+	= 0
+\end{split}\]</div>
+</div>
+<p>In summary,</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-19">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-19">
+<span class="eqno">(7.21)<a class="headerlink" href="#equation-eq-virtualmass-nonref-19" title="Link to this equation">¶</a></span>\[\begin{split}
+	\iint_{S_{\infty}} \mathbf{e}_{r} \mathbf{e}_{r} dS 
+	\rightarrow \frac{4 \pi a_{\infty}^{2}}{3} \delta_{jk}
+\end{split}\]</div>
+</div>
+<p>Therefore,</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-20">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-20">
+<span class="eqno">(7.22)<a class="headerlink" href="#equation-eq-virtualmass-nonref-20" title="Link to this equation">¶</a></span>\[\begin{split}	
+	\frac{3 A_{j} u_{k} - a_{\infty}^{3} u_{j} u_{k}}{a_{\infty}^{2}} \iint_{S_{\infty}} \frac{x_{j} x_{k}}{r^{2}} dS 
+	= 4 \pi A_{j} u_{j} - \frac{ 4 \pi a_{\infty}^{3} }{3} u_{j} u_{j}
+	= 4 \pi A_{j} u_{j} - V_{\infty} u_{j} u_{j}
+\end{split}\]</div>
+</div>
+<p>Thus,</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-21">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-21">
+<span class="eqno">(7.23)<a class="headerlink" href="#equation-eq-virtualmass-nonref-21" title="Link to this equation">¶</a></span>\[\begin{split}	
+	E = \iiint_{V_{\infty}-V} \frac{\rho v^{2}}{2} dV 
+	= \frac{\rho}{2} \left( 4 \pi A_{j} u_{j} - V u^{2} \right)
+	= \frac{\rho}{2} ( 4 \pi A_{j} - V u_{j} ) u_{j}
+\end{split}\]</div>
+</div>
+<p>As we have confirmed (Eq. <a class="reference internal" href="#equation-eq-virtual-eq-a-of-sphere">(7.9)</a>), <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is proportional to <span class="math notranslate nohighlight">\(\mathbf{u}\)</span>. Therefore, we may write</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtual-eq-induced-mass-with-u">
+<div class="math notranslate nohighlight" id="equation-eq-virtual-eq-induced-mass-with-u">
+<span class="eqno">(7.24)<a class="headerlink" href="#equation-eq-virtual-eq-induced-mass-with-u" title="Link to this equation">¶</a></span>\[	P_{j} = m_{ij} u_{i} = 4 \pi \rho A_{j} - \rho V u_{j}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> is the total momentum of the fluid, and the symmetric tensor <span class="math notranslate nohighlight">\(m_{ij}\)</span> is referred to as the induced-mass tensor. Thus, the total kinetic energy of the fluid is expressed as</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-22">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-22">
+<span class="eqno">(7.25)<a class="headerlink" href="#equation-eq-virtualmass-nonref-22" title="Link to this equation">¶</a></span>\[	E = \frac{1}{2} m_{ij} u_{i} u_{j}\]</div>
+</div>
+<p>By substituting Eq. <a class="reference internal" href="#equation-eq-virtual-eq-a-of-sphere">(7.9)</a> into Eq. <a class="reference internal" href="#equation-eq-virtual-eq-induced-mass-with-u">(7.24)</a> we obtain</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-23">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-23">
+<span class="eqno">(7.26)<a class="headerlink" href="#equation-eq-virtualmass-nonref-23" title="Link to this equation">¶</a></span>\[	m_{ij} u_{i} = ( 2 \pi \rho a^{3} - \rho V ) u_{j}\]</div>
+</div>
+<p>Hence,</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtual-eq-virtual-mass-sphere">
+<div class="math notranslate nohighlight" id="equation-eq-virtual-eq-virtual-mass-sphere">
+<span class="eqno">(7.27)<a class="headerlink" href="#equation-eq-virtual-eq-virtual-mass-sphere" title="Link to this equation">¶</a></span>\[	m_{ij}= \rho \frac{2 \pi a^{3}}{3} \delta_{ij} = \frac{1}{2} \rho V \delta_{ij}\]</div>
+</div>
+<p>For the sphere, the induced mass is the half of the fluid mass removed by the sphere.</p>
+<p>Consider a spherical particle oscillating in a fluid under the action of an external force <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, which is the source of the change in the total momentum in the system, i.e., the momentum of the fluid and that of the particle. Therefore,</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-24">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-24">
+<span class="eqno">(7.28)<a class="headerlink" href="#equation-eq-virtualmass-nonref-24" title="Link to this equation">¶</a></span>\[	\frac{d ( M \mathbf{u} + \mathbf{P} )}{dt} = \mathbf{f}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(M\)</span> is the mass of the particle. Substituting Eq. <a class="reference internal" href="#equation-eq-virtual-eq-induced-mass-with-u">(7.24)</a> yields</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-25">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-25">
+<span class="eqno">(7.29)<a class="headerlink" href="#equation-eq-virtualmass-nonref-25" title="Link to this equation">¶</a></span>\[	\left( M \delta_{ij} + m_{ij} \right) \frac{d u_{j}}{dt} = f_{i}\]</div>
+</div>
+<p>We then consider a spherical particle in a fluid under oscillation. If this particle was the fluid, the momentum of this volume is <span class="math notranslate nohighlight">\(\rho V \mathbf{v}\)</span> and the force acting on the fluid particle of volume <span class="math notranslate nohighlight">\(V\)</span> is given by</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-25-1">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-25-1">
+<span class="eqno">(7.30)<a class="headerlink" href="#equation-eq-virtualmass-nonref-25-1" title="Link to this equation">¶</a></span>\[	\rho V \frac{d v_{i}}{dt}\]</div>
+</div>
+<p>where the particle is assumed to be much smaller than the length scale for the spatial change in <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>. This volume is actually the particle and may have velocity <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> different from the fluid velocity <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>. We therefore need to account for the force due to the relative motion <span class="math notranslate nohighlight">\(\mathbf{u} - \mathbf{v}\)</span>:</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-25-2">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-25-2">
+<span class="eqno">(7.31)<a class="headerlink" href="#equation-eq-virtualmass-nonref-25-2" title="Link to this equation">¶</a></span>\[	- m_{ij} \frac{d (u_{j} - v_{j})}{dt} \]</div>
+</div>
+<p>where the negative sign is added since this is a force acting on the particle as the reaction.</p>
+<div class="toggle docutils container">
+<p>When the relative velocity <span class="math notranslate nohighlight">\(\mathbf{u} - \mathbf{v}\)</span> increases, the force acts on the sphere so as to retard the relative velocity.</p>
+</div>
+<p>The equation of motion of the particle is therefore given by</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-26">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-26">
+<span class="eqno">(7.32)<a class="headerlink" href="#equation-eq-virtualmass-nonref-26" title="Link to this equation">¶</a></span>\[	M \frac{d u_{i}}{dt} = \rho V \frac{d v_{i}}{dt} - m_{ij} \frac{d (u_{j} - v_{j})}{dt} \]</div>
+</div>
+<p>The second term on the R.H.S. is the so-called <em>virtual (added) mass</em> force. By making use of Eq. <a class="reference internal" href="#equation-eq-virtual-eq-virtual-mass-sphere">(7.27)</a>, we have</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-27">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-27">
+<span class="eqno">(7.33)<a class="headerlink" href="#equation-eq-virtualmass-nonref-27" title="Link to this equation">¶</a></span>\[	M \frac{d u_{i}}{dt} = \rho V \frac{d v_{i}}{dt} - \frac{1}{2} \rho V \frac{d (u_{i} - v_{i})}{dt} \]</div>
+</div>
+<p>Denoting the particle density as <span class="math notranslate nohighlight">\(\rho_{P}~(=M/V)\)</span>, one can write</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-28">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-28">
+<span class="eqno">(7.34)<a class="headerlink" href="#equation-eq-virtualmass-nonref-28" title="Link to this equation">¶</a></span>\[	\left( \rho_{P} + \rho C_{VM} \right) \frac{d u_{i}}{dt} = \rho \left( 1 + C_{VM} \right) \frac{d v_{i}}{dt} \]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(C_{VM} = 1/2\)</span> is the virtual mass coefficient of the sphere.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="averaged_equation/interfacial_momentum_transfer.html#interfacial-momentum-transfer"><span class="std std-ref">Interfacial momentum transfer</span></a></p>
+</div>
+<p>The virtual mass coefficient is a function of particle shape. According to <span class="bibtex-citation" id="id3">Tomiyama [<a class="reference internal" href="reference.html#id73" title="A. Tomiyama. Drag, lift and virtual mass forces acting on a single bubble. In 3rd Int. Symp. on Two-Phase Flow Modeling and Experimentation, 2004. 2004.">Tom04</a>]</span>, for an oblate spheroild moving vertically <span class="bibtex-citation" id="id4">[<a class="reference internal" href="reference.html#id74" title="H. Lamb. Hydrodynamics. Dover, 6th edition, 1945.">Lam45</a>]</span>,</p>
+<div class="math-wrapper docutils container" id="equation-eq-virtualmass-nonref-29">
+<div class="math notranslate nohighlight" id="equation-eq-virtualmass-nonref-29">
+<span class="eqno">(7.35)<a class="headerlink" href="#equation-eq-virtualmass-nonref-29" title="Link to this equation">¶</a></span>\[\begin{split}C_{VM}
+=
+\left(
+\begin{array}{ccc}
+C_{VM}^{H} &amp;0 &amp;0 \\
+0 &amp;C_{VM}^{H} &amp;0 \\
+0 &amp;0 &amp;C_{VM}^{V}
+\end{array}
+\right)\end{split}\]</div>
+</div>
+<p>where</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[C_{VM}^{V} = 
+\chi^{2} \frac{\sec^{-1} \chi - \sqrt{\chi^2 - 1}}{\sqrt{\chi^2 - 1} - \chi^2 \sec^{-1} \chi} \]</div>
+</div>
+<p>and</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[C_{VM}^{H} = 
+\frac{\chi^2 \sec^{-1} \chi - \sqrt{\chi^2 - 1}}{(2 \chi^2 - 1) \sqrt{\chi^2 - 1} - \chi^2 \sec^{-1} \chi} \]</div>
+</div>
+<p>For a prolate ellipsoids, see <span class="bibtex-citation" id="id5">Tomiyama [<a class="reference internal" href="reference.html#id73" title="A. Tomiyama. Drag, lift and virtual mass forces acting on a single bubble. In 3rd Int. Symp. on Two-Phase Flow Modeling and Experimentation, 2004. 2004.">Tom04</a>]</span>.</p>
+<figure class="align-default" id="virtual-mass-ellipse">
+<img alt="_images/cvm1.png" src="_images/cvm1.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">Virtual mass coefficients, <span class="math notranslate nohighlight">\(C_{VM}^{V}\)</span> and <span class="math notranslate nohighlight">\(C_{VM}^{H}\)</span>, of ellipsoidal body.</span><a class="headerlink" href="#virtual-mass-ellipse" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="drag_sphere.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">8. </span>Drag force acting on spherical body</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="analysis_bubble_motion/bubble_shape_deformation.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">6.3. </span>Shape deformation</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Kosuke Hayashi@Kobe University
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/hayashi-workshop/multiFlowKobe" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+            </a>
+              <a class="muted-link " href="https://www.lab.kobe-u.ac.jp/eng-mfd/" aria-label="Home">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg>
+            </a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'open footnote';</script>
+    <script>let toggleHintHide = 'hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </body>
+</html>
