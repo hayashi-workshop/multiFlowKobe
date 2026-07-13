@@ -1,0 +1,4 @@
+# pyproject.toml
+[tool.esbonio.sphinx]
+buildCommand = ["sphinx-build", "-M", "html", ".", "../build"]
+pythonCommand = ["/opt/anaconda3/envs/sphinx/bin/python"]
